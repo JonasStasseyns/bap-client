@@ -3,7 +3,7 @@ import axios from 'axios'
 
 const Home = () => {
 
-    useEffect(() => axios.get("https://bachelorproef.stasseynsjonas.be/api/v1/").then(res => console.log(res)), [])
+    useEffect(() => axios.get("https://0c1dd13a7ecb.ngrok.io/api/v1/products").then(res => console.log(res)), [])
 
     return (
         <div className="home-wrapper">
