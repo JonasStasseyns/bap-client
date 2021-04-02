@@ -1,0 +1,103 @@
+.nav
+  background-color: #FAFAFA
+  width: 100%
+  margin: 0 auto
+  padding: 2vh 0
+  @media (max-width: 1450px)
+    padding: 1vh 3vw
+    box-sizing: border-box
+
+
+.nav-inner
+  width: 100%
+  max-width: 1400px
+  margin: 0 auto
+  display: flex
+  justify-content: space-between
+  @media (max-width: 850px)
+    display: none
+
+.logo
+  background-image: url("https://www.potentialtoteach.be/src/Frontend/Themes/Bootstrap/Core/Layout/Images/Site/logo.png")
+  background-size: contain
+  background-position: center
+  background-repeat: no-repeat
+  width: 100%
+  height: 100%
+
+.logo-link
+  width: 10%
+  height: 5vh
+
+.links
+  display: flex
+  width: 60%
+  justify-content: space-between
+  align-items: center
+
+.links a
+  text-decoration: none
+  color: black
+
+// Mobile Nav
+.mobile-nav
+  width: 100%
+  height: 6.5vh
+  @media (min-width: 850px)
+    display: none
+
+.mobile-nav-bar
+  display: flex
+  justify-content: space-between
+  align-items: flex-end
+  width: 100vw
+  position: absolute
+  top: 0
+  left: 0
+  height: 6.5vh
+  padding: 0 3vh
+  box-sizing: border-box
+
+.mobile-logo
+  width: 25%
+  height: 5vh
+  background-size: contain
+
+.menu-logo
+  width: 70%
+  margin-top: 4vh
+  height: 20vh
+
+.mobile-nav-menu-wrapper
+  position: absolute
+  width: 100vw
+  height: 100vh
+  display: flex
+  left: 0
+  top: 0
+
+.mobile-nav-menu
+  width: 50%
+  height: 100%
+  background-color: #FAFAFA
+  box-shadow: 0 0 20px rgba(0,0,0,0.3)
+  display: flex
+  justify-content: flex-start
+  align-items: center
+  flex-direction: column
+
+.mobile-links
+  width: 100%
+  height: 30%
+  padding-left: 15%
+  flex-direction: column
+  box-sizing: border-box
+  align-items: flex-start
+
+.mobile-nav-closer
+  width: 50%
+  height: 100%
+  background-color: transparent
+
+.mobile-nav-bar-button
+  font-size: 1.3em
