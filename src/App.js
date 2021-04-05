@@ -5,6 +5,7 @@ import Home from "./pages/Home"
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 import ProductList from "./pages/ProductList";
 import openSocket from 'socket.io-client'
+import ProductDetail from "./pages/ProductDetail";
 
 
 function App() {
@@ -22,8 +23,9 @@ function App() {
             <Header/>
             <Router>
                 <Switch>
-                    <Route path='/' exact component={Home}/>
-                    <Route path='/products' exact component={ProductList}/>
+                    <Route path='/' exact component={Home} />
+                    <Route path='/products' exact component={ProductList} />
+                    <Route path='/products/:id' exact component={ProductDetail} />
                 </Switch>
             </Router>
         </div>

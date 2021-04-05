@@ -126,7 +126,6 @@
 
 .product-list-thumbnail {
   width: 24%;
-  background-color: red;
   box-shadow: 2px 1px 5px rgba(0, 0, 0, 0.3);
 }
 
@@ -135,8 +134,14 @@
   max-height: 40vh;
 }
 
-.product-list-actual {
-  background-color: green;
+.product-list-thumbnail-content {
+  padding: 0 1vw 1vw 1vw;
+  box-sizing: border-box;
+}
+
+.product-list-thumbnail-price {
+  text-align: right;
+  margin: 0;
 }
 
 .generic-wrapper {
