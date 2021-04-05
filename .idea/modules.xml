@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file:///Volumes/arvellon/BAP-Express-API-JS/.idea/BAP-Express-API-JS.iml" filepath="/Volumes/arvellon/BAP-Express-API-JS/.idea/BAP-Express-API-JS.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/bap-client.iml" filepath="$PROJECT_DIR$/.idea/bap-client.iml" />
     </modules>
   </component>

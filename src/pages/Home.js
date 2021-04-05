@@ -1,9 +1,11 @@
 import React, {useState, useEffect} from 'react'
 import axios from 'axios'
 
+const API_ROOT = process.env.REACT_APP_API_BASE
+
 const Home = () => {
 
-    useEffect(() => axios.get("https://0c1dd13a7ecb.ngrok.io/api/v1/products").then(res => console.log(res)), [])
+    useEffect(() => axios.get(`${API_ROOT}/products`).then(res => console.log(res)), [])
 
     return (
         <div className="home-wrapper">
