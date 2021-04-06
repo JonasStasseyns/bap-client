@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import axios from 'axios'
-import ProductListThumbnail from "../components/ProductListThumbnail";
+import ProductListThumbnail from "../../components/ProductListThumbnail";
 
 const API_ROOT = process.env.REACT_APP_API_BASE
 
