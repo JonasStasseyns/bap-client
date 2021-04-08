@@ -12,19 +12,19 @@ const API_ROOT = process.env.REACT_APP_API_BASE
 
 
 
-const Login = () => {
+const Login = (props) => {
 
     const [sid, setSid] = useState(false)
 
     useEffect(() => {
-        const socket = openSocket('https://ad141a8d1e5e.ngrok.io')
+        const socket = openSocket(process.env.REACT_APP_SOCKET)
         socket.on('connect', () => {
             setSid(socket.json.id)
             socket.on('token-event', data => {
                 console.log(data)
                 cookies.set('jwt', data.token, {path:'/'});
                 console.log(cookies.get('jwt'));
-                window.location = '/account'
+                window.location = '/'+props.match.params.destination
             })
         })
     }, [])

@@ -13,13 +13,15 @@ import Profile from "./pages/auth/Profile";
 import {verifyJWT} from "./utils/JWT";
 import Redirect from "./utils/Redirect";
 import SocketLogin from "./pages/auth/SocketLogin";
+import Wizard from './pages/Wizard'
+import Messages from "./pages/Messages";
 
 
 function App() {
 
     // const socket = openSocket('https://bap-express-js-nmd-2020-2021.glitch.me');
 
-
+    console.log(verifyJWT())
     return (
         <div className="App">
             <Header/>
@@ -34,8 +36,13 @@ function App() {
                     <Route path='/techs/:id' exact component={TechnicianDetail} />
 
                     <Route path='/auth/login' exact component={Login} />
+                    <Route path='/auth/login/:destination' exact component={Login} />
                     <Route path='/auth/socket-login/:sid' exact component={SocketLogin} />
-                    <Route path='/account' exact render={() => (verifyJWT() ? (<Profile />):(<Redirect to="/auth/login"/>))} />
+                    <Route path='/account' exact render={() => (verifyJWT() ? (<Profile />):(<Redirect to="/auth/login" destination='account'/>))} />
+
+                    <Route path='/wizard' exact component={Wizard} />
+
+                    <Route path='/messages' exact render={() => (verifyJWT() ? (<Messages />):(<Redirect to="/auth/login" destination='messages'/>))} />
                 </Switch>
             </Router>
         </div>
