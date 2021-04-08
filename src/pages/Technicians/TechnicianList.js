@@ -9,7 +9,7 @@ const TechnicianList = () => {
     const [products, setProducts] = useState(false)
     const [search, setSearch] = useState(false)
 
-    useEffect(() => axios.get(`${API_ROOT}/products`).then(res => {
+    useEffect(() => axios.get(`${API_ROOT}/technicians`).then(res => {
         console.log(res.data)
         setProducts(res.data)
     }).catch(err => console.log(err)), [])
