@@ -17,14 +17,16 @@ const SocketLogin = (props) => {
 
     useEffect(() => {
         if (verifyJWT()) {
-            setDisp('I WORK')
+            setDisp('JWT IS VALID')
             axios.post(`${API_ROOT}/auth/login/check`, {
                 sid: props.match.params.sid,
                 token: cookies.get('jwt')
             }).then(res => {
-                setDisp('THIS DOES')
+                setDisp('JWT IS VALID AND SENT THROUGH TUNNEL')
                 setReddy(true)
             }).catch(err => console.log(err))
+        }else{
+            setDisp('INVALID JWT?????')
         }
     }, [])
 

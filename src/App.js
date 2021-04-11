@@ -10,16 +10,24 @@ import ProductList from "./pages/Products/ProductList";
 import ProductDetail from "./pages/Products/ProductDetail";
 import Login from "./pages/auth/Login";
 import Profile from "./pages/auth/Profile";
-import {verifyJWT} from "./utils/JWT";
+import {decodeJWT, verifyJWT} from "./utils/JWT";
 import Redirect from "./utils/Redirect";
 import SocketLogin from "./pages/auth/SocketLogin";
 import Wizard from './pages/Wizard'
 import Messages from "./pages/Messages";
-
+import Register from "./pages/auth/Register";
+import TechnicianManagement from "./pages/Technicians/TechnicianManagement";
 
 function App() {
 
-    // const socket = openSocket('https://bap-express-js-nmd-2020-2021.glitch.me');
+
+    const socket = openSocket(process.env.REACT_APP_SOCKET)
+    const userData = decodeJWT()
+    socket.on('connect', () => {
+        socket.emit('register-chat', userData.userId)
+    })
+    socket.on('receive-message', data => console.log(data))
+
 
     console.log(verifyJWT())
     return (
@@ -34,7 +42,9 @@ function App() {
 
                     <Route path='/techs' exact component={TechnicianList} />
                     <Route path='/techs/:id' exact component={TechnicianDetail} />
+                    <Route path='/techs/manage' exact component={TechnicianManagement} />
 
+                    <Route path='/auth/register' exact component={Register} />
                     <Route path='/auth/login' exact component={Login} />
                     <Route path='/auth/login/:destination' exact component={Login} />
                     <Route path='/auth/socket-login/:sid' exact component={SocketLogin} />
@@ -42,7 +52,8 @@ function App() {
 
                     <Route path='/wizard' exact component={Wizard} />
 
-                    <Route path='/messages' exact render={() => (verifyJWT() ? (<Messages />):(<Redirect to="/auth/login" destination='messages'/>))} />
+                    <Route path='/messages' exact render={() => (verifyJWT() ? (<Messages socket={socket} />):(<Redirect to="/auth/login"/>))} />
+                    <Route path='/messages/:correspondant' exact render={() => (verifyJWT() ? (<Messages socket={socket} />):(<Redirect to="/auth/login"/>))} />
                 </Switch>
             </Router>
         </div>

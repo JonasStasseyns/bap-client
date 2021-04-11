@@ -13,15 +13,14 @@ const Header = () => {
     return (
         <div className='nav'>
             <div className='nav-inner'>
-                <a href='https://www.potentialtoteach.be/zoek-materiaal' className='logo-link'>
+                <a href='/' className='logo-link'>
                     <div className='logo' />
                 </a>
                 <div className='links'>
-                    <a href='https://www.potentialtoteach.be/zoek-materiaal' className='nav-link'>Zoek materiaal</a>
-                    <a href='https://www.potentialtoteach.be/veelgestelde-vragen' className='nav-link'>Veelgestelde
-                        vragen</a>
-                    <a href='https://www.potentialtoteach.be/over-potential' className='nav-link'>Over Potential</a>
-                    <a href='https://www.potentialtoteach.be/contact' className='nav-link'>Contact</a>
+                    <a href='/products' className='nav-link'>Toestellen</a>
+                    <a href='/techs' className='nav-link'>Installateurs</a>
+                    <a href='/wizard' className='nav-link'>Waar begin ik?</a>
+                    <a href='/messages' className='nav-link'>Berichten</a>
                 </div>
             </div>
             {/*mobile-nav*/}
@@ -39,12 +38,10 @@ const Header = () => {
                         </a>
                         <div className='links mobile-links'>
                             <a href='/' className='nav-link'>Home</a>
-                            <a href='/cards' className='nav-link'>Bekijk kaarten</a>
-                            <a href='https://www.potentialtoteach.be/zoek-materiaal' className='nav-link'>Zoek materiaal</a>
-                            <a href='https://www.potentialtoteach.be/veelgestelde-vragen' className='nav-link'>Veelgestelde
-                                vragen</a>
-                            <a href='https://www.potentialtoteach.be/over-potential' className='nav-link'>Over Potential</a>
-                            <a href='https://www.potentialtoteach.be/contact' className='nav-link'>Contact</a>
+                            <a href='/products' className='nav-link'>Toestellen</a>
+                            <a href='/techs' className='nav-link'>Installateurs</a>
+                            <a href='/wizard' className='nav-link'>Waar begin ik?</a>
+                            <a href='/messages' className='nav-link'>Berichten</a>
                         </div>
                     </div>
                     <div className='mobile-nav-closer' onClick={closeMobileMenu}></div>

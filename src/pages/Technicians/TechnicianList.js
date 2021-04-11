@@ -1,22 +1,23 @@
 import React, {useState, useEffect} from 'react'
 import axios from 'axios'
 import ProductListThumbnail from "../../components/ProductListThumbnail";
+import TechnicianListThumbnail from "../../components/TechnicianListThumbnail";
 
 const API_ROOT = process.env.REACT_APP_API_BASE
 
 const TechnicianList = () => {
 
-    const [products, setProducts] = useState(false)
+    const [techs, setTechs] = useState(false)
     const [search, setSearch] = useState(false)
 
-    useEffect(() => axios.get(`${API_ROOT}/technicians`).then(res => {
+    useEffect(() => axios.get(`${API_ROOT}/techs`).then(res => {
         console.log(res.data)
-        setProducts(res.data)
+        setTechs(res.data)
     }).catch(err => console.log(err)), [])
 
-    const searchProducts = () => axios.get(`${API_ROOT}/products/search/${search}`).then(res => {
+    const searchProducts = () => axios.get(`${API_ROOT}/techs/search/${search}`).then(res => {
         console.log(res)
-        setProducts(res.data)
+        setTechs(res.data)
     }).catch(err => console.log(err))
 
     return (
@@ -27,7 +28,7 @@ const TechnicianList = () => {
                 <button onClick={searchProducts}>Zoeken</button>
             </div>
             <div className="product-list-actual">
-                {products && products.map((product, key) => <ProductListThumbnail product={product} key={key}/>)}
+                {techs && techs.map((tech, key) => <TechnicianListThumbnail tech={tech} key={key}/>)}
             </div>
         </div>
     )
