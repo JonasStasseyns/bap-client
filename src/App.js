@@ -26,7 +26,7 @@ function App() {
     socket.on('connect', () => {
         socket.emit('register-chat', userData.userId)
     })
-    socket.on('receive-message', data => console.log(data))
+
 
 
     console.log(verifyJWT())

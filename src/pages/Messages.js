@@ -1,4 +1,4 @@
-import React, {useState,useEffect} from 'react'
+import React, {useState,useEffect, useRef} from 'react'
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import {decodeJWT} from "../utils/JWT";
@@ -8,6 +8,8 @@ import ConversationThumb from "../components/ConversationThumb";
 
 const Messages = (props) => {
 
+    const messageEl = useRef(null);
+
     const [newMessageText, setNewMessageText] = useState(false)
     const [JWT, setJWT] = useState({})
     const [conversations, setConversations] = useState(false)
@@ -16,11 +18,14 @@ const Messages = (props) => {
 
     const { correspondant } = useParams()
 
-
+    props.socket.on('receive-message', data => loadMessages())
 
     useEffect(() => {
+        scroller()
         setJWT(decodeJWT())
     }, [])
+
+
 
     useEffect(() => loadMessages(), [JWT])
 
@@ -29,7 +34,10 @@ const Messages = (props) => {
         console.log(JWT)
         if (correspondant) {
             axios.get(process.env.REACT_APP_API_BASE+'/auth/users/'+correspondant).then(res => setActiveChatCorr(res.data))
-            axios.get(process.env.REACT_APP_API_BASE+'/messages/conversation/'+JWT.userId+'/'+correspondant).then(res => setActiveChat(res.data))
+            axios.get(process.env.REACT_APP_API_BASE+'/messages/conversation/'+JWT.userId+'/'+correspondant).then(res => {
+                setActiveChat(res.data)
+                console.log(res.data)
+            })
         }
         setConversations([])
         axios.get(process.env.REACT_APP_API_BASE+'/messages/'+JWT.userId).then(res => {
@@ -54,6 +62,15 @@ const Messages = (props) => {
         })
     }
 
+    const scroller = () => {
+        if (messageEl) {
+            messageEl.current.addEventListener('DOMNodeInserted', event => {
+                const { currentTarget: target } = event;
+                target.scroll({ top: target.scrollHeight, behavior: 'smooth' });
+            });
+        }
+    }
+
     return(
         <div className="messages-wrapper">
             <div className="conversations-section">
@@ -63,15 +80,17 @@ const Messages = (props) => {
             </div>
             <div className="chat-section">
                 <div className="chat-title-bar">{activeChatCorr && `${activeChatCorr.firstName} ${activeChatCorr.lastName}`}</div>
-                <div className="chat-messages-container">
+                <div className="chat-messages-container" ref={messageEl}>
                     {activeChat && activeChat.map((message, key) => (
-                        <div key={key} className="active-chat-message acm-other" dangerouslySetInnerHTML={{__html: message.message}}/>
+                        <div key={key} className={"active-chat-message "+(message.sender_id==JWT.userId?'acm-me':'acm-other')}>
+                            <p dangerouslySetInnerHTML={{__html: message.message}}/>
+                        </div>
                     ))}
                 </div>
                 <div className="chat-send-message-bar">
                     <CKEditor
                         editor={ ClassicEditor }
-                        data="<p>Hello from CKEditor 5!</p>"
+                        data=""
                         onChange={(event, editor) => setNewMessageText(editor.getData())}
                     />
                     <button className='messages-send-button' onClick={sendMessage}>Verstuur</button>
