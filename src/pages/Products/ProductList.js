@@ -8,6 +8,7 @@ const ProductList = () => {
 
     const [products, setProducts] = useState(false)
     const [search, setSearch] = useState(false)
+    const [catFilter, setCatFilter] = useState(false)
 
     useEffect(() => axios.get(`${API_ROOT}/products`).then(res => {
         console.log(res.data)
@@ -25,6 +26,14 @@ const ProductList = () => {
             <div className="product-list-filter-container">
                 <input type="text" className="product-list-filter-search-input" onChange={(e) => setSearch(e.target.value)}/>
                 <button onClick={searchProducts}>Zoeken</button>
+                <select onChange={(e) => setCatFilter(e.target.value)}>
+                    <option value="false">Alle types</option>
+                    <option value="mobile">Mobiele Airco</option>
+                    <option value="monoblock">Monoblock</option>
+                    <option value="monosplit">Monosplit</option>
+                    <option value="multisplit">Multisplit</option>
+                    <option value="heatpump">Warmtepomp</option>
+                </select>
             </div>
             <div className="product-list-actual">
                 {products && products.map((product, key) => <ProductListThumbnail product={product} key={key}/>)}
