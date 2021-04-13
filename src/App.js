@@ -17,6 +17,7 @@ import Wizard from './pages/Wizard'
 import Messages from "./pages/Messages";
 import Register from "./pages/auth/Register";
 import TechnicianManagement from "./pages/Technicians/TechnicianManagement";
+import AddProduct from "./pages/admin/addProduct";
 
 function App() {
 
@@ -48,7 +49,9 @@ function App() {
                     <Route path='/auth/login' exact component={Login} />
                     <Route path='/auth/login/:destination' exact component={Login} />
                     <Route path='/auth/socket-login/:sid' exact component={SocketLogin} />
-                    <Route path='/account' exact render={() => (verifyJWT() ? (<Profile />):(<Redirect to="/auth/login" destination='account'/>))} />
+                    {/*<Route path='/account' exact render={() => (verifyJWT() ? (<Profile />):(<Redirect to="/auth/login" destination='account'/>))} />*/}
+
+                    <Route path='/admin/add-product' exact render={() => (verifyJWT() ? (<AddProduct />):(<Redirect to="/auth/login" destination='admin/add-product'/>))} />
 
                     <Route path='/wizard' exact component={Wizard} />
 

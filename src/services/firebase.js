@@ -1,6 +1,8 @@
-import firebase from 'firebase'
+import firebase from 'firebase/app';
+import 'firebase/firestore';
+import 'firebase/storage';
 
-var firebaseConfig = {
+const firebaseConfig = {
     apiKey: "AIzaSyDavgPo5r444s5ORbLRbk6X8sbyNWov-I4",
     authDomain: "bachelorproef-b2b80.firebaseapp.com",
     projectId: "bachelorproef-b2b80",
@@ -14,6 +16,11 @@ firebase.initializeApp(firebaseConfig);
 const storage = firebase.storage().ref();
 
 export const uploadProductImage = (image, id) => {
-    const ref = storage.child('products/' + id + '.png');
+    const ref = storage.child('products/' + id + '.jpg');
     return ref.put(image);
+};
+
+export const getUrlById = (id) => {
+    const ref = storage.child('products/' + id + '.jpg');
+    return ref.getDownloadURL();
 };
