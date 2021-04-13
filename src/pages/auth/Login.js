@@ -17,19 +17,6 @@ const Login = (props) => {
 
     const [sid, setSid] = useState(false)
 
-    useEffect(() => {
-        const socket = openSocket(process.env.REACT_APP_SOCKET)
-        socket.on('connect', () => {
-            setSid(socket.json.id)
-            socket.on('token-event', data => {
-                console.log(data)
-                cookies.set('jwt', data.token, {path:'/', maxAge: 2592000});
-                console.log(cookies.get('jwt'));
-                window.location = props.destination
-            })
-        })
-    }, [])
-
     const [email, setEmail] = useState(false)
     const [password, setPassword] = useState(false)
 
