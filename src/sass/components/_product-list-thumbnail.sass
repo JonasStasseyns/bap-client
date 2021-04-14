@@ -2,13 +2,17 @@
   width: 24%
   color: #212121
   text-decoration: none
+  margin-bottom: 4vh
+  @media (max-width: 1450px)
+    width: 32%
 
 .product-list-thumbnail
-  box-shadow: 2px 1px 5px rgba(0, 0, 0, 0.3)
+  box-shadow: 2px 1px 5px rgba(0, 0, 0, 0.1)
   height: 60vh
   display: flex
   flex-direction: column
   justify-content: space-between
+  padding: 2vw 1vw
 
 .product-list-thumbnail-image
   width: 100%
@@ -16,9 +20,21 @@
 
 .product-list-thumbnail-content
   line-height: 140%
-  padding: 0 1vw 1vw 1vw
+  height: 50%
+  //padding: 0 1vw 1vw 1vw
   box-sizing: border-box
+  display: flex
+  flex-direction: column
+  justify-content: space-between
+  text-align: justify
 
 .product-list-thumbnail-price
   text-align: right
   margin: 0
+  color: $color-secondary
+
+.product-list-thumbnail-title
+  color: $color-primary
+  font-weight: 500
+  font-size: 1.6em
+  font-variant-caps: all-small-caps

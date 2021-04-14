@@ -59,6 +59,7 @@ const Messages = (props) => {
         }).then(res => {
             props.socket.emit('message-sorter', {id: correspondant, message: newMessageText})
             loadMessages()
+            setNewMessageText('')
         })
     }
 
@@ -90,7 +91,7 @@ const Messages = (props) => {
                 <div className="chat-send-message-bar">
                     <CKEditor
                         editor={ ClassicEditor }
-                        data=""
+                        data={newMessageText}
                         onChange={(event, editor) => setNewMessageText(editor.getData())}
                     />
                     <button className='messages-send-button' onClick={sendMessage}>Verstuur</button>

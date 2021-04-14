@@ -18,6 +18,7 @@ import Messages from "./pages/Messages";
 import Register from "./pages/auth/Register";
 import TechnicianManagement from "./pages/Technicians/TechnicianManagement";
 import AddProduct from "./pages/admin/addProduct";
+import CatchAll from "./pages/404";
 
 function App() {
 
@@ -25,7 +26,7 @@ function App() {
     const socket = openSocket(process.env.REACT_APP_SOCKET)
     const userData = decodeJWT()
     socket.on('connect', () => {
-        socket.emit('register-chat', userData.userId)
+        if(userData !== null) socket.emit('register-chat', userData.userId)
     })
 
 
@@ -57,6 +58,8 @@ function App() {
 
                     <Route path='/messages' exact render={() => (verifyJWT() ? (<Messages socket={socket} />):(<Redirect to="/auth/login"/>))} />
                     <Route path='/messages/:correspondant' exact render={() => (verifyJWT() ? (<Messages socket={socket} />):(<Redirect to="/auth/login"/>))} />
+
+                    <Route component={CatchAll}/>
                 </Switch>
             </Router>
         </div>

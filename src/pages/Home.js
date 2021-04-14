@@ -5,7 +5,11 @@ const API_ROOT = process.env.REACT_APP_API_BASE
 
 const Home = () => {
 
-    useEffect(() => axios.get(`${API_ROOT}/products`).then(res => console.log(res)), [])
+    const [techs, setTechs] = useState(false)
+    const [products, setProducts] = useState(false)
+
+    useEffect(() => axios.get(`${API_ROOT}/products`).then(res => setProducts(res.data)).catch(err => console.log(err)), [])
+    useEffect(() => axios.get(`${API_ROOT}/techs`).then(res => setTechs(res.data)).catch(err => console.log(err)), [])
 
     return (
         <div className="home-wrapper">

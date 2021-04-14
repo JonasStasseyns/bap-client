@@ -24,7 +24,7 @@ const ProductListThumbnail = (props) => {
                 <img className="product-list-thumbnail-image" src={image ? image : placeholder} alt={image} />
                 <div className="product-list-thumbnail-content">
                     <h3 className="product-list-thumbnail-title">{product.title}</h3>
-                    <p className="product-list-thumbnail-excerpt" dangerouslySetInnerHTML={{__html: product.description.substring(0, 255)+"..."}}/>
+                    <p className="product-list-thumbnail-excerpt" dangerouslySetInnerHTML={{__html: product.description.substring(0, 200)+"..."}}/>
                     <h4 className="product-list-thumbnail-price">&euro; {product.price}</h4>
                 </div>
             </div>

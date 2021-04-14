@@ -1,15 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400&display=swap')
+@import "globals/variables"
+
 @import 'components/header'
 @import 'components/forms'
 @import 'components/conversation-thumb'
 @import 'components/product-list-thumbnail'
 @import 'pages/product-list'
+@import 'pages/product-detail'
 @import 'pages/messages'
+@import 'pages/auth'
+
+*
+  font-family: 'Roboto',  sans-serif
+  font-weight: 400
+  font-size: 15px
 
 .generic-wrapper
   width: 100%
   max-width: 1400px
   margin: 0 auto
+  @media (max-width: 1450px)
+    padding: 1vh 3vw
+    box-sizing: border-box
 
 .qr-login
-  //width: 20vh !important
-  //height: 20vh !important
+  width: 200px !important
+  height: 200px !important
