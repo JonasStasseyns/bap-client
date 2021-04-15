@@ -137,6 +137,11 @@
   justify-content: space-between;
   flex-wrap: wrap;
 }
+@media (max-width: 800px) {
+  .form-fields-container {
+    flex-direction: column;
+  }
+}
 
 .form-fields-container input {
   margin: 1vh 0;
@@ -145,6 +150,12 @@
   padding: 0.5vw;
   box-sizing: border-box;
   border-bottom: 1px solid #CCC;
+}
+@media (max-width: 800px) {
+  .form-fields-container input {
+    width: 100%;
+    margin: 5vh 0;
+  }
 }
 
 .conversation-thumb-button {
@@ -377,15 +388,36 @@ figure table tbody tr td {
 .auth-dfdc button {
   border: none;
   background-color: #398FB5;
+  color: #FAFAFA;
 }
 
 .login-qr-text-container {
   display: flex;
+  margin-top: 10vh;
+}
+@media (max-width: 400px) {
+  .login-qr-text-container {
+    flex-direction: column;
+  }
 }
 
 .login-qr-text {
   padding: 1vw;
   box-sizing: border-box;
+}
+
+.user-role-select {
+  width: 45%;
+  height: 6vh;
+  align-self: flex-end;
+  margin-bottom: 1vh;
+  border: 0;
+  border-bottom: 1px solid #CCC;
+}
+@media (max-width: 800px) {
+  .user-role-select {
+    width: 100%;
+  }
 }
 
 * {

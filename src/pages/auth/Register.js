@@ -54,8 +54,8 @@ const Register = (props) => {
 
 
     return (
-        <div className="generic-wrapper register-wrapper">
-            <div className="form-container register-form-container">
+        <div className="generic-wrapper auth-wrapper">
+            <div className="auth-dfdc">
                 <h2>Registreer</h2>
                 <div className="form-fields-container">
                     <input type="text" placeholder='email' onChange={(e) => setEmail(e.target.value)}/>
@@ -66,7 +66,7 @@ const Register = (props) => {
                     <input type="text" placeholder='land' onChange={(e) => setCountry(e.target.value)}/>
                     <input type="text" placeholder='0497159463' onChange={(e) => setPhone(e.target.value)}/>
 
-                    <select onChange={(e) => setUserType(e.target.value)}>
+                    <select className="user-role-select" onChange={(e) => setUserType(e.target.value)}>
                         <option value="user">Gebruiker</option>
                         <option value="tech">Installateur</option>
                         <option value="seller">Verkoper</option>
@@ -81,7 +81,7 @@ const Register = (props) => {
                     }
 
                 </div>
-                <button onClick={login}>LOGIN</button>
+                <button onClick={login}>REGISTREER</button>
             </div>
         </div>
     )
