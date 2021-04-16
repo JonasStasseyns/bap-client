@@ -19,6 +19,7 @@ import Register from "./pages/auth/Register";
 import TechnicianManagement from "./pages/Technicians/TechnicianManagement";
 import AddProduct from "./pages/admin/addProduct";
 import CatchAll from "./pages/404";
+import Logout from "./pages/auth/Logout";
 
 function App() {
 
@@ -48,6 +49,7 @@ function App() {
 
                     <Route path='/auth/register' exact component={Register} />
                     <Route path='/auth/login' exact component={Login} />
+                    <Route path='/auth/logout' exact component={Logout} />
                     <Route path='/auth/login/:destination' exact component={Login} />
                     <Route path='/auth/socket-login/:sid' exact component={SocketLogin} />
                     {/*<Route path='/account' exact render={() => (verifyJWT() ? (<Profile />):(<Redirect to="/auth/login" destination='account'/>))} />*/}

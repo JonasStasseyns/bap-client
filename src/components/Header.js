@@ -1,14 +1,19 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import ReactDOM from 'react-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars } from '@fortawesome/free-solid-svg-icons'
+import {verifyJWT} from "../utils/JWT";
 
 const Header = () => {
+
+    // TODO Fix lifecycle of checking JWT  and rendering auth buttons conditionally
 
     const [showMenu, setShowMenu] = useState(false)
 
     const closeMobileMenu = () => setShowMenu(false)
     const openMobileMenu = () => setShowMenu(true)
+
+    useEffect(() => console.log(!!verifyJWT()), [])
 
     return (
         <div className='nav'>
@@ -21,6 +26,7 @@ const Header = () => {
                     <a href='/techs' className='nav-link'>Installateurs</a>
                     <a href='/wizard' className='nav-link'>Waar begin ik?</a>
                     <a href='/messages' className='nav-link'>Berichten</a>
+                    {!!verifyJWT() ? <a href='/auth/login' className='nav-link'>Log in</a> : <a href='/auth/logout' className='nav-link'>Uitloggen</a>}
                 </div>
             </div>
             {/*mobile-nav*/}
@@ -42,6 +48,7 @@ const Header = () => {
                             <a href='/techs' className='nav-link'>Installateurs</a>
                             <a href='/wizard' className='nav-link'>Waar begin ik?</a>
                             <a href='/messages' className='nav-link'>Berichten</a>
+                            {!!verifyJWT() ? <a href='/auth/login' className='nav-link'>Log in</a> : <a href='/auth/logout' className='nav-link'>Uitloggen</a>}
                         </div>
                     </div>
                     <div className='mobile-nav-closer' onClick={closeMobileMenu}></div>
