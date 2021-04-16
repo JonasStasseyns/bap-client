@@ -7,6 +7,7 @@ import {verifyJWT} from "../utils/JWT";
 const Header = () => {
 
     // TODO Fix lifecycle of checking JWT  and rendering auth buttons conditionally
+    // TODO Add register button next to login when not authenticated
 
     const [showMenu, setShowMenu] = useState(false)
 
