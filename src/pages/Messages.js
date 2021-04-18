@@ -10,7 +10,7 @@ const Messages = (props) => {
 
     const messageEl = useRef(null);
 
-    const [newMessageText, setNewMessageText] = useState(false)
+    const [newMessageText, setNewMessageText] = useState('')
     const [JWT, setJWT] = useState({})
     const [conversations, setConversations] = useState(false)
     const [activeChatCorr, setActiveChatCorr] = useState('Gesprek met technieker')
@@ -107,6 +107,8 @@ const Messages = (props) => {
                     <textarea
                         value={newMessageText}
                         onChange={e => setNewMessageText(e.target.value)}
+                        placeholder="Uw bericht"
+                        onKeyPress={(e) => (e.key === "Enter" && sendMessage())}
                     />
                     {/*TODO Styling*/}
                     {/*TODO Return key to send*/}

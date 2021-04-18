@@ -29,6 +29,10 @@
 .chat-send-message-bar
   display: flex
   justify-content: space-between
+  textarea
+    width: 100%
+    border: 0
+    padding: 2vw 1vw
 
 .messages-send-button
   width: 10%
@@ -41,6 +45,8 @@
 .active-chat-message
   padding: 1vw
   display: flex
+  p
+    padding: 1vw 2vw
 
 .acm-me
   justify-content: flex-end
@@ -49,12 +55,12 @@
   justify-content: flex-start
 
 .acm-me p
-  background-color: blue
+  background-color: $color-primary
   border-radius: 1vh
-  padding: 0 1vw
+  //padding: 0 1vw
   color: #FAFAFA
 
 .acm-other p
-  background-color: #CCC
-  border-radius: 1vh
+  background-color: #EEE
+  //border-radius: 1vh
   padding: 0 1vw
