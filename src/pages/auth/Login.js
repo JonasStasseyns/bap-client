@@ -27,9 +27,9 @@ const Login = (props) => {
             setSid(socket.json.id)
             socket.on('token-event', data => {
                 console.log(data)
-                cookies.set('jwt', data.token, {path:'/', maxAge: 10});
+                cookies.set('jwt', data.token, {path:'/', maxAge: 2592000});
                 console.log(cookies.get('jwt'));
-                window.location = props.destination
+                window.location = props.destination ? props.destination : '/'
             })
         })
     }, [])
