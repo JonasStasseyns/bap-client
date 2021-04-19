@@ -20,6 +20,8 @@ import TechnicianManagement from "./pages/Technicians/TechnicianManagement";
 import AddProduct from "./pages/admin/addProduct";
 import CatchAll from "./pages/404";
 import Logout from "./pages/auth/Logout";
+import Cart from "./pages/Products/Cart";
+import Payment from "./pages/Payment"
 
 function App() {
 
@@ -42,6 +44,7 @@ function App() {
 
                     <Route path='/products' exact component={ProductList} />
                     <Route path='/products/:id' exact component={ProductDetail} />
+                    <Route path='/cart' exact component={Cart} />
 
                     <Route path='/techs' exact component={TechnicianList} />
                     <Route path='/techs/:id' exact component={TechnicianDetail} />
@@ -60,6 +63,8 @@ function App() {
 
                     <Route path='/messages' exact render={() => (verifyJWT() ? (<Messages socket={socket} />):(<Redirect to="/auth/login"/>))} />
                     <Route path='/messages/:correspondant' exact render={() => (verifyJWT() ? (<Messages socket={socket} />):(<Redirect to="/auth/login"/>))} />
+
+                    <Route path='/payment' exact render={Payment} />))} />
 
                     <Route component={CatchAll}/>
                 </Switch>

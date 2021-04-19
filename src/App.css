@@ -427,6 +427,53 @@ figure table tbody tr td {
   }
 }
 
+.cart-product-list {
+  width: 100%;
+  padding: 2vw 0;
+}
+
+.cart-product-thumbnail {
+  display: flex;
+  justify-content: space-between;
+  align-self: center;
+}
+.cart-product-thumbnail .product-image-container {
+  width: 10%;
+}
+.cart-product-thumbnail .product-image-container img {
+  height: 10vh;
+}
+.cart-product-thumbnail .product-image-container .product-value {
+  vertical-align: center;
+}
+
+.cart-total-row {
+  display: flex;
+  justify-content: flex-end;
+  border-top: 1px solid #AAA;
+}
+.cart-total-row .cart-total-price {
+  font-weight: bold;
+  padding: 2vh 0;
+}
+
+.cart-wrapper .address-details {
+  display: flex;
+  flex-direction: column;
+}
+.cart-wrapper .address-details .address-fields {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 30%;
+}
+.cart-wrapper .address-details .address-fields input {
+  padding: 0.5vw 1vw;
+  margin: 1vh 1vw 1vh 0;
+  border: 0;
+  border-bottom: 1px solid #AAAAAA;
+}
+
 * {
   font-family: "Roboto", sans-serif;
   font-weight: 400;

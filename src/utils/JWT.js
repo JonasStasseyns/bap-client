@@ -26,3 +26,14 @@ export const decodeJWT = () => {
     }
     return null;
 }
+
+export const authPolice = () => {
+    let token = cookies.get('jwt')
+    try {
+        const decoded = jwt.verify(token, process.env.REACT_APP_SECRET);
+        console.log(decoded)
+    } catch(err) {
+        console.log('Not logged in')
+        window.location = '/auth/login'
+    }
+}
