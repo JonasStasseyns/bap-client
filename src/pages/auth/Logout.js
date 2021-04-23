@@ -5,7 +5,7 @@ const cookies = new Cookies()
 
 const Logout = () => {
     const history = useHistory()
-    cookies.remove('JWT')
+    cookies.remove('jwt')
     history.push('/')
     return true
 }

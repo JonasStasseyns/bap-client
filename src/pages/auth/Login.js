@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import axios from 'axios'
 import Cookies from 'universal-cookie';
 import jwt from 'jsonwebtoken'
@@ -16,6 +16,10 @@ const API_ROOT = process.env.REACT_APP_API_BASE
 const Login = (props) => {
 
     const [sid, setSid] = useState(false)
+    const [showRP, setShowRP] = useState(false)
+
+    const [responseMessage, setResponseMessage] = useState('')
+    const [PWResponse, setPWResponse] = useState('')
 
     const [email, setEmail] = useState(false)
     const [password, setPassword] = useState(false)
@@ -27,7 +31,7 @@ const Login = (props) => {
             setSid(socket.json.id)
             socket.on('token-event', data => {
                 console.log(data)
-                cookies.set('jwt', data.token, {path:'/', maxAge: 2592000});
+                cookies.set('jwt', data.token, {path: '/', maxAge: 2592000});
                 console.log(cookies.get('jwt'));
                 window.location = props.destination ? props.destination : '/'
             })
@@ -36,28 +40,45 @@ const Login = (props) => {
 
 
     const login = () => axios.post(`${API_ROOT}/auth/login`, {email, password}).then(res => {
-        cookies.set('jwt', res.data.token, {path:'/'});
+        cookies.set('jwt', res.data.token, {path: '/'});
         console.log(cookies.get('jwt')); // Pacman
         window.location = '/'
-    }).catch(err => console.log(err))
+    }).catch(err => setResponseMessage('E-mail en/of wachtwoord onjuist'))
 
+    const resetPassword = () => axios.get(process.env.REACT_APP_API_BASE + '/auth/password-reset/start/' + email).then(res => setPWResponse('E-mail met instructies verzonden')).catch(err => setPWResponse('E-mail met instructies verzonden'))
 
     return (
         <div className="generic-wrapper auth-wrapper">
+            {showRP &&
             <div className="auth-dfdc">
-                <h2>Login</h2>
-                <input type="text" placeholder="e-mailadres" onChange={(e) => setEmail(e.target.value)}/>
-                <input type="text" placeholder="••••••••" onChange={(e) => setPassword(e.target.value)}/>
-                <button onClick={login}>LOGIN</button>
-                <Link to='/auth/register'>Nog geen account? Registreer</Link>
+                <h2>E-mailadres</h2>
+                {PWResponse}
+                <input type="text" placeholder="e-mailadres" value={email} onChange={(e) => setEmail(e.target.value)}/>
+                <button onClick={resetPassword}>Herstel wachtwoord</button>
             </div>
-            <div className="login-qr-text-container">
-                {sid && <QRCode className="qr-login" value={`https://bachelorproef-b2b80.web.app/auth/socket-login/${sid}`} size={256} />}
-                <div className="login-qr-text">
-                    <h2>Reeds ingelogd op je smartphone?</h2>
-                    <h2>Scan dan deze QR-code</h2>
+            }
+            {!showRP &&
+            <div>
+                <div className="auth-dfdc">
+                    <h2>Login</h2>
+                    {responseMessage}
+                    <input type="text" placeholder="e-mailadres" onChange={(e) => setEmail(e.target.value)}/>
+                    <input type="password" placeholder="••••••••" onChange={(e) => setPassword(e.target.value)}/>
+                    <button onClick={login}>LOGIN</button>
+                    <Link to='/auth/register'>Nog geen account? Registreer</Link>
+                    <p onClick={() => setShowRP(true)}>Wachtwoord vergeten?</p>
+                </div>
+                <div className="login-qr-text-container">
+                    {sid &&
+                    <QRCode className="qr-login" value={`https://bachelorproef-b2b80.web.app/auth/socket-login/${sid}`}
+                            size={256}/>}
+                    <div className="login-qr-text">
+                        <h2>Reeds ingelogd op je smartphone?</h2>
+                        <h2>Scan dan deze QR-code</h2>
+                    </div>
                 </div>
             </div>
+            }
         </div>
     )
 }

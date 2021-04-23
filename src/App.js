@@ -22,6 +22,7 @@ import CatchAll from "./pages/404";
 import Logout from "./pages/auth/Logout";
 import Cart from "./pages/Products/Cart";
 import Payment from "./pages/Payment"
+import PasswordReset from "./pages/auth/PasswordReset";
 
 function App() {
 
@@ -55,6 +56,7 @@ function App() {
                     <Route path='/auth/logout' exact component={Logout} />
                     <Route path='/auth/login/:destination' exact component={Login} />
                     <Route path='/auth/socket-login/:sid' exact component={SocketLogin} />
+                    <Route path='/auth/reset-password/:token' exact component={PasswordReset} />
                     {/*<Route path='/account' exact render={() => (verifyJWT() ? (<Profile />):(<Redirect to="/auth/login" destination='account'/>))} />*/}
 
                     <Route path='/admin/add-product' exact render={() => (verifyJWT() ? (<AddProduct />):(<Redirect to="/auth/login" destination='admin/add-product'/>))} />

@@ -21,12 +21,15 @@ const ProductListThumbnail = (props) => {
     return (
         <a href={"/products/" + product._id} className="product-list-thumbnail-link">
             <div className="product-list-thumbnail">
+
                 <img className="product-list-thumbnail-image" src={image ? image : placeholder} alt={image} />
+
                 <div className="product-list-thumbnail-content">
                     <h3 className="product-list-thumbnail-title">{product.title}</h3>
                     <p className="product-list-thumbnail-excerpt" dangerouslySetInnerHTML={{__html: product.description.substring(0, 200)+"..."}}/>
                     <h4 className="product-list-thumbnail-price">&euro; {product.price}</h4>
                 </div>
+
             </div>
         </a>
     )

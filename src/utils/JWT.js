@@ -15,8 +15,8 @@ export const verifyJWT = () => {
     return null;
 }
 
-export const decodeJWT = () => {
-    let token = cookies.get('jwt')
+export const decodeJWT = (param) => {
+    let token = param ? param : cookies.get('jwt')
     if (token) {
         try {
             return jwt.verify(token, process.env.REACT_APP_SECRET)

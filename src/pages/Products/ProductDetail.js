@@ -14,7 +14,8 @@ const ProductDetail = (props) => {
 
     useEffect( () => fetchImage(), [product])
     useEffect( () => {
-        localStorage.setItem('cart', JSON.stringify(cart))
+        console.log(cart)
+        cart && cart.length && localStorage.setItem('cart', JSON.stringify(cart))
         console.log(cart)
     }, [cart])
 
@@ -24,8 +25,13 @@ const ProductDetail = (props) => {
         setImage(response);
     }
 
-    const addToCart = () => {
+    useEffect(() => {
+        console.log(JSON.parse(localStorage.getItem('cart')))
         setCart(JSON.parse(localStorage.getItem('cart')) || [])
+    }, [])
+
+    const addToCart = () => {
+        console.log(cart)
         setCart([...cart, product])
     }
 

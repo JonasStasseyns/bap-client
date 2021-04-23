@@ -5,7 +5,7 @@ const TechnicianListThumbnail = (props) => {
     const tech = props.tech
     console.log(tech)
     return (
-        <a href={"/techs/" + tech._id}>
+        <a href={"/techs/" + tech._id} className="product-list-thumbnail-link">
             <div className="product-list-thumbnail">
                 <img className="product-list-thumbnail-image" src={tech.image} alt={tech.image} />
                 <div className="product-list-thumbnail-content">

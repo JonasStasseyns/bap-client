@@ -27,20 +27,21 @@ const Header = () => {
                     <a href='/techs' className='nav-link'>Installateurs</a>
                     <a href='/wizard' className='nav-link'>Waar begin ik?</a>
                     <a href='/messages' className='nav-link'>Berichten</a>
+                    <a href='/cart' className='nav-link'>Winkelwagen</a>
                     {verifyJWT() ? <a href='/auth/logout' className='nav-link'>Uitloggen</a> : <a href='/auth/login' className='nav-link'>Log in</a>}
                 </div>
             </div>
             {/*mobile-nav*/}
             <div className='mobile-nav'>
                 <div className='mobile-nav-bar'>
-                    <a href='https://www.potentialtoteach.be/zoek-materiaal' className='logo-link mobile-logo'>
+                    <a href='https://ac-assistant.be' className='logo-link mobile-logo'>
                         <div className='logo' />
                     </a>
                     <FontAwesomeIcon className="mobile-nav-bar-button" icon={faBars} onClick={openMobileMenu}/>
                 </div>
                 {showMenu && <div className='mobile-nav-menu-wrapper'>
                     <div className='mobile-nav-menu'>
-                        <a href='https://www.potentialtoteach.be/zoek-materiaal' className='logo-link mobile-logo menu-logo'>
+                        <a href='https://ac-assistant.be' className='logo-link mobile-logo menu-logo'>
                             <div className='logo' />
                         </a>
                         <div className='links mobile-links'>
@@ -49,7 +50,8 @@ const Header = () => {
                             <a href='/techs' className='nav-link'>Installateurs</a>
                             <a href='/wizard' className='nav-link'>Waar begin ik?</a>
                             <a href='/messages' className='nav-link'>Berichten</a>
-                            {!!verifyJWT() ? <a href='/auth/login' className='nav-link'>Log in</a> : <a href='/auth/logout' className='nav-link'>Uitloggen</a>}
+                            <a href='/cart' className='nav-link'>Winkelwagen</a>
+                            {verifyJWT() ? <a href='/auth/logout' className='nav-link'>Uitloggen</a> : <a href='/auth/login' className='nav-link'>Log in</a>}
                         </div>
                     </div>
                     <div className='mobile-nav-closer' onClick={closeMobileMenu}></div>

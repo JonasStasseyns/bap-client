@@ -59,7 +59,7 @@ const Register = (props) => {
                 <h2>Registreer</h2>
                 <div className="form-fields-container">
                     <input type="text" placeholder='email' onChange={(e) => setEmail(e.target.value)}/>
-                    <input type="text" placeholder='password' onChange={(e) => setPassword(e.target.value)}/>
+                    <input type="password" placeholder='password' onChange={(e) => setPassword(e.target.value)}/>
                     <input type="text" placeholder='voornaam' onChange={(e) => setFirstName(e.target.value)}/>
                     <input type="text" placeholder='naam' onChange={(e) => setLastName(e.target.value)}/>
                     <input type="text" placeholder='adres' onChange={(e) => setAddress(e.target.value)}/>
