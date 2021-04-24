@@ -1,0 +1,66 @@
+.wizard-container
+  padding-top: 10vh
+  font-family: Roboto, sans-serif
+  display: flex
+  justify-content: space-between
+
+  h1
+    font-size: 2.5em
+  .wizard-info-section
+    width: 60%
+    h2
+      font-size: 2em
+      color: $color-primary
+      font-variant: all-small-caps
+      font-weight: bold
+    h3
+      font-size: 1.5em
+      color: $color-secondary
+      font-variant: all-small-caps
+      font-weight: bold
+    p
+      line-height: 150%
+      text-align: justify
+      span
+        color: $color-primary
+        font-variant-caps: all-small-caps
+        font-size: 1.35em
+        font-weight: bold
+    ul
+      padding-left: 5vw
+      li
+        padding-left: 2vw
+        margin: 1vh 0
+  .wizard-form-section
+    width: 30%
+    &-step-container
+      box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2)
+      padding: 1vw
+      h3
+        margin-left: 1vh
+        font-size: 1.5em
+        font-weight: bold
+        font-variant-caps: all-small-caps
+        font-size: 1.5em
+        color: $color-primary
+      .wizard-ac-type-thumb
+        padding: 0.8vw 0 1vw 1vw
+        background-color: $color-secondary
+        border-radius: 0.5vw
+        margin: 1vh
+        color: #FAFAFA
+        font-weight: bold
+        font-variant-caps: all-small-caps
+        font-size: 1.5em
+      .wizard-next-step-container
+        display: flex
+        justify-content: flex-end
+        button
+          border: 0
+          padding: 0.5vw 1vw
+          margin-right: 1vh
+          border-radius: 0.2vw
+          font-variant-caps: all-small-caps
+          font-size: 1.1em
+        button:disabled
+          opacity: 0.5

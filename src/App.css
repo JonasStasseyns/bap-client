@@ -249,10 +249,15 @@
   padding: 2vw 0;
 }
 
+.product-list-filter-container {
+  display: flex;
+  align-items: flex-end;
+}
 .product-list-filter-container input[type=text] {
   padding: 0.2vw 1vw 0.2vw 0.1vw;
   border: 0;
   border-bottom: 1px solid #CCC;
+  margin-right: 2vw;
 }
 .product-list-filter-container button {
   padding: 0.2vw 1vw;
@@ -513,6 +518,88 @@ figure table tbody tr td {
   border-bottom: 1px solid #AAAAAA;
 }
 
+.wizard-container {
+  padding-top: 10vh;
+  font-family: Roboto, sans-serif;
+  display: flex;
+  justify-content: space-between;
+}
+.wizard-container h1 {
+  font-size: 2.5em;
+}
+.wizard-container .wizard-info-section {
+  width: 60%;
+}
+.wizard-container .wizard-info-section h2 {
+  font-size: 2em;
+  color: #FC6767;
+  font-variant: all-small-caps;
+  font-weight: bold;
+}
+.wizard-container .wizard-info-section h3 {
+  font-size: 1.5em;
+  color: #398FB5;
+  font-variant: all-small-caps;
+  font-weight: bold;
+}
+.wizard-container .wizard-info-section p {
+  line-height: 150%;
+  text-align: justify;
+}
+.wizard-container .wizard-info-section p span {
+  color: #FC6767;
+  font-variant-caps: all-small-caps;
+  font-size: 1.35em;
+  font-weight: bold;
+}
+.wizard-container .wizard-info-section ul {
+  padding-left: 5vw;
+}
+.wizard-container .wizard-info-section ul li {
+  padding-left: 2vw;
+  margin: 1vh 0;
+}
+.wizard-container .wizard-form-section {
+  width: 30%;
+}
+.wizard-container .wizard-form-section-step-container {
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+  padding: 1vw;
+}
+.wizard-container .wizard-form-section-step-container h3 {
+  margin-left: 1vh;
+  font-size: 1.5em;
+  font-weight: bold;
+  font-variant-caps: all-small-caps;
+  font-size: 1.5em;
+  color: #FC6767;
+}
+.wizard-container .wizard-form-section-step-container .wizard-ac-type-thumb {
+  padding: 0.8vw 0 1vw 1vw;
+  background-color: #398FB5;
+  border-radius: 0.5vw;
+  margin: 1vh;
+  color: #FAFAFA;
+  font-weight: bold;
+  font-variant-caps: all-small-caps;
+  font-size: 1.5em;
+}
+.wizard-container .wizard-form-section-step-container .wizard-next-step-container {
+  display: flex;
+  justify-content: flex-end;
+}
+.wizard-container .wizard-form-section-step-container .wizard-next-step-container button {
+  border: 0;
+  padding: 0.5vw 1vw;
+  margin-right: 1vh;
+  border-radius: 0.2vw;
+  font-variant-caps: all-small-caps;
+  font-size: 1.1em;
+}
+.wizard-container .wizard-form-section-step-container .wizard-next-step-container button:disabled {
+  opacity: 0.5;
+}
+
 * {
   font-family: "Roboto", sans-serif;
   font-weight: 400;
@@ -534,6 +621,10 @@ figure table tbody tr td {
 .qr-login {
   width: 200px !important;
   height: 200px !important;
+}
+
+.disabled {
+  opacity: 0.5;
 }
 
 /*# sourceMappingURL=App.css.map */
