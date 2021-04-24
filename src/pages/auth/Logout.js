@@ -5,8 +5,10 @@ const cookies = new Cookies()
 
 const Logout = () => {
     const history = useHistory()
-    cookies.remove('jwt')
+    cookies.remove('jwt', {path:'/'})
     history.push('/')
-    return true
+    return (
+        <h1>logout</h1>
+    )
 }
 export default Logout

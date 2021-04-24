@@ -4,6 +4,7 @@ import Cookies from 'universal-cookie';
 import jwt from 'jsonwebtoken'
 import openSocket from "socket.io-client";
 import QRCode from 'qrcode.react'
+import {uploadProfilePicture, uploadTechPicture} from "../../services/firebase";
 
 const cookies = new Cookies();
 
@@ -11,21 +12,6 @@ const API_ROOT = process.env.REACT_APP_API_BASE
 
 
 const Register = (props) => {
-
-
-    // useEffect(() => {
-    //     const socket = openSocket(process.env.REACT_APP_SOCKET)
-    //     socket.on('connect', () => {
-    //         setSid(socket.json.id)
-    //         socket.on('token-event', data => {
-    //             console.log(data)
-    //             cookies.set('jwt', data.token, {path:'/', maxAge: 10});
-    //             console.log(cookies.get('jwt'));
-    //             window.location = props.destination
-    //         })
-    //     })
-    // }, [])
-
     const [email, setEmail] = useState(false)
     const [password, setPassword] = useState(false)
     const [firstName, setFirstName] = useState(false)
@@ -47,33 +33,37 @@ const Register = (props) => {
 
     const login = () => axios.post(`${API_ROOT}/auth/register`, {email, password, firstName, lastName, address, country, phone}).then(res => {
         console.log(res.data.data.user._id)
-        if(userType === 'tech') axios.post(`${API_ROOT}/techs/create`, {hourlyRate, city, firstName, lastName, company, image, description, userId: res.data.data.user._id}).then(res => {
-            window.location = '/auth/login'
+        if(userType === "user" && image) uploadProfilePicture(image).then(res => window.location = '/auth/login')
+        if(userType === "tech") axios.post(`${API_ROOT}/techs/create`, {hourlyRate, city, firstName, lastName, company, description, userId: res.data.data.user._id}).then(res => {
+            console.log(res)
+            if(image) uploadTechPicture(image, res.data._id).then(res => console.log(res))
         }).catch(err => console.log(err))
     }).catch(err => console.log(err))
 
+    const selectImage = (image) => setImage(image)
 
     return (
         <div className="generic-wrapper auth-wrapper">
             <div className="auth-dfdc">
                 <h2>Registreer</h2>
                 <div className="form-fields-container">
-                    <input type="text" placeholder='email' onChange={(e) => setEmail(e.target.value)}/>
-                    <input type="password" placeholder='password' onChange={(e) => setPassword(e.target.value)}/>
+                    <input type="text" placeholder='E-mailadres' onChange={(e) => setEmail(e.target.value)}/>
+                    <input type="password" placeholder='wachtwoord' onChange={(e) => setPassword(e.target.value)}/>
+                    <input type="password" placeholder='herhaal wachtwoord' onChange={(e) => setPassword(e.target.value)}/>
                     <input type="text" placeholder='voornaam' onChange={(e) => setFirstName(e.target.value)}/>
                     <input type="text" placeholder='naam' onChange={(e) => setLastName(e.target.value)}/>
                     <input type="text" placeholder='adres' onChange={(e) => setAddress(e.target.value)}/>
                     <input type="text" placeholder='land' onChange={(e) => setCountry(e.target.value)}/>
                     <input type="text" placeholder='0497159463' onChange={(e) => setPhone(e.target.value)}/>
+                    <input type="file" onChange={(e) => selectImage(e.target.files[0])} />
 
                     <select className="user-role-select" onChange={(e) => setUserType(e.target.value)}>
                         <option value="user">Gebruiker</option>
                         <option value="tech">Installateur</option>
-                        <option value="seller">Verkoper</option>
                     </select>
 
                     {userType === 'tech' &&
-                    <div>
+                    <div className="form-fields-container">
                         <input type="text" placeholder='Prijs per uur' onChange={(e) => setHourlyRate(e.target.value)}/>
                         <input type="text" placeholder='Bedrijfsnaam' onChange={(e) => setCompany(e.target.value)}/>
                         <input type="text" placeholder='Beschrijving' onChange={(e) => setDescription(e.target.value)}/>

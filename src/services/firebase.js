@@ -20,6 +20,16 @@ export const uploadProductImage = (image, id) => {
     return ref.put(image);
 };
 
+export const uploadProfilePicture = (image, id) => {
+    const ref = storage.child('profile-pictures/' + id + '.jpg');
+    return ref.put(image);
+};
+
+export const uploadTechPicture = (image, id) => {
+    const ref = storage.child('techs/' + id + '.jpg');
+    return ref.put(image);
+};
+
 export const getUrlById = (id) => {
     const ref = storage.child('products/' + id + '.jpg');
     return ref.getDownloadURL();
