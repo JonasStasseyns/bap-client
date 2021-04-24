@@ -620,6 +620,17 @@ figure table tbody tr td {
   opacity: 0.5;
 }
 
+.account-data {
+  display: flex;
+  flex-direction: column;
+}
+.account-data input {
+  border: 0;
+  border-bottom: 1px solid #CCCCCC;
+  padding: 1vw 0 0.5vw 0.3vw;
+  margin-bottom: 1vh;
+}
+
 * {
   font-family: "Roboto", sans-serif;
   font-weight: 400;

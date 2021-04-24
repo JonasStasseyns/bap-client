@@ -9,7 +9,7 @@ import TechnicianDetail from "./pages/Technicians/TechnicianDetail";
 import ProductList from "./pages/Products/ProductList";
 import ProductDetail from "./pages/Products/ProductDetail";
 import Login from "./pages/auth/Login";
-import Profile from "./pages/auth/Profile";
+import Account from "./pages/auth/Account";
 import {decodeJWT, verifyJWT} from "./utils/JWT";
 import Redirect from "./utils/Redirect";
 import SocketLogin from "./pages/auth/SocketLogin";
@@ -57,7 +57,7 @@ function App() {
                     <Route path='/auth/login/:destination' exact component={Login} />
                     <Route path='/auth/socket-login/:sid' exact component={SocketLogin} />
                     <Route path='/auth/reset-password/:token' exact component={PasswordReset} />
-                    {/*<Route path='/account' exact render={() => (verifyJWT() ? (<Profile />):(<Redirect to="/auth/login" destination='account'/>))} />*/}
+                    <Route path='/auth/account' exact render={() => (verifyJWT() ? (<Account />):(<Redirect to="/auth/login" destination='auth/account'/>))} />
 
                     <Route path='/admin/add-product' exact render={() => (verifyJWT() ? (<AddProduct />):(<Redirect to="/auth/login" destination='admin/add-product'/>))} />
 
