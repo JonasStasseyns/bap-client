@@ -559,6 +559,19 @@ figure table tbody tr td {
   padding-left: 2vw;
   margin: 1vh 0;
 }
+.wizard-container .wizard-info-section .ul-flex-container {
+  display: flex;
+  justify-content: space-between;
+}
+.wizard-container .wizard-info-section .ul-flex-container ul {
+  padding: 0 1.5vw;
+}
+.wizard-container .wizard-info-section .ul-flex-container ul h4 {
+  font-variant-caps: all-small-caps;
+  font-weight: bold;
+  font-size: 1.1em;
+  padding-left: 2vw;
+}
 .wizard-container .wizard-form-section {
   width: 30%;
 }
@@ -586,12 +599,12 @@ figure table tbody tr td {
 }
 .wizard-container .wizard-form-section-step-container .wizard-next-step-container {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
 }
 .wizard-container .wizard-form-section-step-container .wizard-next-step-container button {
   border: 0;
   padding: 0.5vw 1vw;
-  margin-right: 1vh;
+  margin: 0 1vh;
   border-radius: 0.2vw;
   font-variant-caps: all-small-caps;
   font-size: 1.1em;
