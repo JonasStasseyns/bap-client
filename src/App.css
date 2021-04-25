@@ -619,6 +619,10 @@ figure table tbody tr td {
 .wizard-container .wizard-form-section-step-container .wizard-next-step-container button:disabled {
   opacity: 0.5;
 }
+.wizard-container .wizard-form-section-step-container h6 {
+  padding: 0 0.8vw 0 0.6vw;
+  text-align: justify;
+}
 
 .account-data {
   display: flex;
@@ -629,6 +633,30 @@ figure table tbody tr td {
   border-bottom: 1px solid #CCCCCC;
   padding: 1vw 0 0.5vw 0.3vw;
   margin-bottom: 1vh;
+}
+
+.home-wrapper {
+  background-color: red;
+}
+.home-wrapper .banner {
+  background-color: green;
+  display: flex;
+  justify-content: space-between;
+}
+.home-wrapper .banner div {
+  width: 50%;
+  padding: 5vw;
+  box-sizing: border-box;
+}
+.home-wrapper .banner div h1 {
+  font-size: 2.5em;
+  font-weight: bold;
+  font-variant-caps: all-small-caps;
+  margin: 0;
+}
+.home-wrapper .banner div h3 {
+  color: red;
+  margin: 0;
 }
 
 * {

@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import axios from 'axios'
+import {Link} from "react-router-dom";
 
 const API_ROOT = process.env.REACT_APP_API_BASE
 
@@ -35,9 +36,18 @@ const Home = () => {
     }
 
     return (
-        <div className="home-wrapper">
-            <h1>HomePage</h1>
-            <button onClick={test}>DDDDDD</button>
+        <div className="generic-wrapper home-wrapper">
+            <div className="banner">
+                <div className="left">
+                    <h1>AC Assistant</h1>
+                    <h3>Uw airconditioning assistent!</h3>
+                </div>
+                <div className="right">
+                    <Link to='/wizard'>
+                        <button>Persoonlijk advies</button>
+                    </Link>
+                </div>
+            </div>
         </div>
     )
 }
