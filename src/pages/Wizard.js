@@ -1,14 +1,16 @@
 import {useEffect, useState} from 'react'
+import {decodeJWT} from "../utils/JWT";
+import {post} from "axios";
 
 const Wizard = () => {
 
-    const [naam, setNaam] = useState('jonas')
     const [query, setQuery] = useState({
         install: false,
         filter: false,
-        sort: false
+        budget: false
     })
     const [step, setStep] = useState(0)
+    const [message, setMessage] = useState('')
 
     useEffect(() => {
         console.log(query)
@@ -16,6 +18,15 @@ const Wizard = () => {
 
     const updateQuery = (param, value) => {
         setQuery(prevState => ({...prevState, [param]: value}))
+    }
+
+    const finishWizard = async () => {
+        console.log(query)
+        if (query.budget && query.filter && query.install) {
+            const advice = query
+            advice.uid = await decodeJWT().userId
+            post(process.env.REACT_APP_API_BASE + '/advice', query).then(res => console.log(res))
+        }
     }
 
     return (
@@ -217,8 +228,49 @@ const Wizard = () => {
                         </div>
                         }
                         <div className="wizard-next-step-container">
-                            <button disabled={!query.filter} onClick={() => setStep(step - 1)}>Vorige stap</button>
-                            <button disabled={!query.filter} onClick={() => setStep(step + 1)}>Volgende stap</button>
+                            <button onClick={() => setStep(step - 1)}>Vorige stap</button>
+                            <button disabled={!query.install} onClick={() => setStep(step + 1)}>Volgende stap</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            }
+            {step === 2 &&
+            <div className="wizard-container">
+                <div className="wizard-info-section">
+                    <h2>Stap 3: Wat is je budget?</h2>
+                    <p>Nu heb je reeds het type airco gekozen alsook de installatiemethode. Als laatste stap moet je nog enkel je budget kiezen uit volgende segmenten.</p>
+
+                    <h3>A. Lage prijsklasse</h3>
+                    <p>Wij bieden geen toestellen aan van slechte kwaliteit. Wanneer je kiest voor een goedkoper toestel, zal je dit niet bekopen met koelcapaciteit, veiligheid of andere belangrijke factoren. In dit geval verlies je enkel kwaliteit in eigenschappen van de tweede graad. Deze zijn dan bijvoorbeeld het geluidsniveau, de tijd die het toestel nodig heeft om te om in te schakelen of het design.</p>
+
+                    <h3>B. Prijs-kwaliteit</h3>
+                    <p>Deze prijsklasse is nogal breed. Wanneer je hiervoor kiest kan je gerust zijn dat je betaalt voor wat je krijgt, maar je kan weinig betalen voor een basisklasse airco alsook tegen een hoge prijs voor een topkwaliteits airco betalen.</p>
+
+                    <h3>C. Luxe toestellen</h3>
+                    <p>Bij deze prijsklasse zal je meestal meer betalen voor luxueuse eigenschappen dan voor koelcapaciteit. Deze toestellen zijn dus duurder dan ze eigenlijk zouden mogen zijn, maar ze kunnen je specifieke noden vervullen. Indien je bijvoorbeeld wel een airco wil, maar deze mag absoluut geen lawaai maken, kan je zo'n toestel vinden in deze prijsklasse. Een ander voorbeeld zou een toestel met smart-home mogelijkheden kunnen zijn.</p>
+                </div>
+                <div className="wizard-form-section">
+                    <div className="wizard-form-section-step-container">
+                        <h3>Welk budget kies je?</h3>
+
+                        <div>
+                            <div
+                                className={"wizard-ac-type-thumb " + (query.budget === 'low' || query.budget === false ? "" : "disabled")}
+                                onClick={() => updateQuery('budget', 'low')}>Basisklasse
+                            </div>
+                            <div
+                                className={"wizard-ac-type-thumb " + (query.budget === 'medium' || query.budget === false ? "" : "disabled")}
+                                onClick={() => updateQuery('budget', 'medium')}>Prijs-kwaliteit
+                            </div>
+                            <div
+                                className={"wizard-ac-type-thumb " + (query.budget === 'high' || query.budget === false ? "" : "disabled")}
+                                onClick={() => updateQuery('budget', 'high')}>Luxe toestellen
+                            </div>
+                        </div>
+                        <div className="wizard-next-step-container">
+                            <button onClick={() => setStep(step - 1)}>Vorige stap</button>
+                            <button disabled={!query.budget} onClick={finishWizard}>Indienen</button>
                         </div>
                     </div>
                 </div>
