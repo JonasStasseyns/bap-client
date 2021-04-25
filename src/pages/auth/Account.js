@@ -1,6 +1,5 @@
-import React, {useState, useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import axios from 'axios'
-import ProductListThumbnail from "../../components/ProductListThumbnail";
 import {decodeJWT, verifyJWT} from "../../utils/JWT";
 
 const API_ROOT = process.env.REACT_APP_API_BASE
@@ -12,10 +11,14 @@ const Account = () => {
     const [user, setUser] = useState(false)
     const [search, setSearch] = useState(false)
     const [message, setMessage] = useState('')
+    const [passwordResetMessage, setPasswordResetMessage] = useState('')
+    const [showChangePassword, setShowChangePassword] = useState(false)
+    const [newPassword, setNewPassword] = useState(false)
+    const [newPasswordRepeat, setNewPasswordRepeat] = useState(false)
 
     useEffect(() => {
         console.log(decodeJWT())
-        axios.get(`${API_ROOT}/auth/users/`+decodeJWT().userId).then(res => {
+        axios.get(`${API_ROOT}/auth/users/` + decodeJWT().userId).then(res => {
             setUser(res.data)
         }).catch(err => console.log(err))
     }, [])
@@ -30,37 +33,49 @@ const Account = () => {
     }
 
     useEffect(() => setTimeout(() => {
-        if(message!=='') setMessage('')
+        if (message !== '') setMessage('')
     }, 5000))
 
-    useEffect(() => axios.put(process.env.REACT_APP_API_BASE+'/auth/users/'+user._id, user).then(res => setMessage('Wijzigingen opgeslagen.')), [user])
+    useEffect(() => axios.put(process.env.REACT_APP_API_BASE + '/auth/users/' + user._id, user).then(res => setMessage('Wijzigingen opgeslagen.')), [user])
+
+    const updatePassword = () => {
+        if(newPassword !== newPasswordRepeat) return setPasswordResetMessage('Wachtwoorden komen niet overeen')
+        axios.post(process.env.REACT_APP_API_BASE+'/auth/password-reset/finish', {token: user._id, password: newPassword})
+    }
 
     return (
         <div className="generic-wrapper product-list-wrapper">
             <h1>Account</h1>
             {user &&
-                <div className="account-data">
-                    <div className="account-data-item">
-                        {/*<button onClick={() => updateUser()}>ss</button>*/}
-                        <input type="text" value={user.firstName} name="firstName" onChange={(e) => setUser(prevUser => ({ ...prevUser, [e.target.name]: e.target.value }))}/>
-                    </div>
-                    <div className="account-data-item">
-                        <input type="text" value={user.lastName} name="lastName" onChange={(e) => setUser(prevUser => ({ ...prevUser, [e.target.name]: e.target.value }))}/>
-                    </div>
-                    <div className="account-data-item">
-                        <input type="text" value={user.email} name="email" onChange={(e) => setUser(prevUser => ({ ...prevUser, [e.target.name]: e.target.value }))}/>
-                    </div>
-                    <div className="account-data-item">
-                        <input type="text" value={user.address} name="address" onChange={(e) => setUser(prevUser => ({ ...prevUser, [e.target.name]: e.target.value }))}/>
-                    </div>
-                    <div className="account-data-item">
-                        <input type="text" value={user.country} name="country" onChange={(e) => setUser(prevUser => ({ ...prevUser, [e.target.name]: e.target.value }))}/>
-                    </div>
-                    <div className="account-data-item">
-                        <input type="text" value={user.phone} name="phone" onChange={(e) => setUser(prevUser => ({ ...prevUser, [e.target.name]: e.target.value }))}/>
-                    </div>
-                    {message}
+            <div className="account-data">
+                {/*<button onClick={() => updateUser()}>ss</button>*/}
+                <input type="text" value={user.firstName} name="firstName"
+                       onChange={(e) => setUser(prevUser => ({...prevUser, [e.target.name]: e.target.value}))}/>
+                <input type="text" value={user.lastName} name="lastName"
+                       onChange={(e) => setUser(prevUser => ({...prevUser, [e.target.name]: e.target.value}))}/>
+                <input type="text" value={user.email} name="email"
+                       onChange={(e) => setUser(prevUser => ({...prevUser, [e.target.name]: e.target.value}))}/>
+                <input type="text" value={user.address} name="address"
+                       onChange={(e) => setUser(prevUser => ({...prevUser, [e.target.name]: e.target.value}))}/>
+                <input type="text" value={user.country} name="country"
+                       onChange={(e) => setUser(prevUser => ({...prevUser, [e.target.name]: e.target.value}))}/>
+                <input type="text" value={user.phone} name="phone"
+                       onChange={(e) => setUser(prevUser => ({...prevUser, [e.target.name]: e.target.value}))}/>
+                {message}
+                <div className="change-password-div">
+                    <button onClick={() => setShowChangePassword(true)}>Wijzig wachtwoord</button>
+                    {showChangePassword &&
+                        <div className="change-password-modal">
+                            <h3>Kies een nieuw wachtwoord</h3>
+                            {passwordResetMessage}
+                            <input type="password" placeholder="wachtwoord" onChange={(e) => setNewPassword(e.target.value)}/>
+                            <input type="password" placeholder="wachtwoord herhaling" onChange={(e) => setNewPasswordRepeat(e.target.value)}/>
+                            <button onClick={updatePassword}>Wijzig wachtwoord</button>
+                        </div>
+                    }
                 </div>
+            </div>
+
             }
         </div>
     )

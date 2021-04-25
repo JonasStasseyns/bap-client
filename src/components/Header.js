@@ -28,6 +28,7 @@ const Header = () => {
                     <a href='/wizard' className='nav-link'>Waar begin ik?</a>
                     <a href='/messages' className='nav-link'>Berichten</a>
                     <a href='/cart' className='nav-link'>Winkelwagen</a>
+                    {verifyJWT() ? <a href='/auth/account' className='nav-link'>Account</a> : ''}
                     {verifyJWT() ? <a href='/auth/logout' className='nav-link'>Uitloggen</a> : <a href='/auth/login' className='nav-link'>Log in</a>}
                 </div>
             </div>

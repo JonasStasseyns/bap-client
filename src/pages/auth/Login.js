@@ -62,7 +62,7 @@ const Login = (props) => {
                 <div className="auth-dfdc">
                     <h2>Login</h2>
                     {responseMessage}
-                    <input type="text" placeholder="e-mailadres" onChange={(e) => setEmail(e.target.value)}/>
+                    <input type="email" placeholder="e-mailadres" onChange={(e) => setEmail(e.target.value)}/>
                     <input type="password" placeholder="••••••••" onChange={(e) => setPassword(e.target.value)}/>
                     <button onClick={login}>LOGIN</button>
                     <Link to='/auth/register'>Nog geen account? Registreer</Link>
