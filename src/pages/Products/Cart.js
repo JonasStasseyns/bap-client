@@ -57,17 +57,26 @@ const Cart = (props) => {
         })
     }
 
+    const deleteFromCart = (index) => {
+        console.log(products[index])
+    }
+
     return (
         <div className="generic-wrapper cart-wrapper">
-            <h1>Winkelwagen</h1>
-            <div className="cart-product-list">
-                {products && products.map((product, key) => <CartItem product={product} key={key} />)}
-                <div className="cart-total-row">
-                    <div className="cart-total-price">{total && '€'+total}</div>
+            <div className="product-list-container">
+                <h1>Winkelwagen</h1>
+                <div className="cart-product-list">
+                    {products && products.map((product, key) => <CartItem product={product} key={key} index={key} deleteFromCart={deleteFromCart()} />)}
+                    <div className="cart-total-row">
+                        <div className="cart-total-price">Totaal {total && '€'+total}</div>
+                    </div>
                 </div>
             </div>
             <div className="address-details">
-                <h2 className="current-address">{user && user.address}</h2>
+                <h1>Levering</h1>
+                <p>Standaard leveren wij op het adres dat u invoerde bij het registreren. Wil u aan ander leveringsadres opgeven? Dan kan dit hieronder.</p>
+                <h2>Huidig adres</h2>
+                <h3 className="current-address">{user && user.address}</h3>
                 <div className="address-fields">
                     <input type="text" placeholder='Straat + huisnummer' onChange={(e) => setFirstName(e.target.value)}/>
                     <input type="text" placeholder='Postcode' onChange={(e) => setLastName(e.target.value)}/>

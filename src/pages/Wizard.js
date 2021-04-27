@@ -25,7 +25,7 @@ const Wizard = () => {
         if (query.budget && query.filter && query.install) {
             const advice = query
             advice.uid = await decodeJWT().userId
-            post(process.env.REACT_APP_API_BASE + '/advice', query).then(res => console.log(res))
+            post(process.env.REACT_APP_API_BASE + '/advice', query).then(res => window.location = '/auth/account/advice')
         }
     }
 

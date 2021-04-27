@@ -2,9 +2,10 @@ import React, {useEffect, useState} from 'react'
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import {CKEditor} from "@ckeditor/ckeditor5-react";
 import {uploadProductImage} from "../../services/firebase";
-import {post} from "axios";
+import axios, {post} from "axios";
+import {useParams} from "react-router-dom";
 
-const AddProduct = () => {
+const EditProduct = (props) => {
     const [title, setTitle] = useState(false)
     const [description, setDescription] = useState(false)
     const [specs, setSpecs] = useState([{name: '', value: ''}])
@@ -15,13 +16,25 @@ const AddProduct = () => {
     const [price, setPrice] = useState()
     const [controlHook, render] = useState(false)
 
+    const { id } = useParams()
+
     const imageSelection = (e) => setImage(e.target.files[0])
-    const createProduct = () => {
-        post(process.env.REACT_APP_API_BASE+'/products/create', {title, category, description, specs: JSON.stringify(specs), price}).then(res => {
+
+    const updateProduct = () => { // CREATE UPDATE
+        post(process.env.REACT_APP_API_BASE+'/products/update', {title, category, description, specs: JSON.stringify(specs), price, id}).then(res => {
             console.log(res)
-            uploadProductImage(image, res.data._id).then(res => setCpMessage('Product aangemaakt')).catch(err => setCpMessage('Oeps! Er ging iets mis.'))
+            uploadProductImage(image, id).then(res => setCpMessage('Product aangepast')).catch(err => setCpMessage('Oeps! Er ging iets mis.'))
         })
     }
+
+    useEffect(() => axios.get(process.env.REACT_APP_API_BASE+'/products/get/'+ id).then(res => {
+        const data = res.data
+        setTitle(data.title)
+        setDescription(data.description)
+        setSpecs(JSON.parse(data.specs))
+        setPrice(data.price)
+        setCategory(data.category)
+    }), [])
 
     const updateSpecs = (index, arg, value) => {
         let arr = specs
@@ -34,13 +47,13 @@ const AddProduct = () => {
 
     return (
         <div className="generic-wrapper auth-wrapper">
-            <h1 className="add-product-title">Nieuw product</h1>
+            <h1 className="add-product-title">Product bewerken</h1>
             <div className="auth-dfdc add-product-container">
-                <input type="text" placeholder='Product titel' onChange={(e) => setTitle(e.target.value)}/>
+                <input type="text" placeholder='Product titel' value={title} onChange={(e) => setTitle(e.target.value)}/>
                 <h3>Beschrijving</h3>
                 <CKEditor
                     editor={ ClassicEditor }
-                    data=""
+                    data={description}
                     onChange={(event, editor) => setDescription(editor.getData())}
                 />
                 <h3>Specificaties</h3>
@@ -56,9 +69,9 @@ const AddProduct = () => {
 
                 {/*TODO POST Request and wait for resp to get in and fix image upload*/}
 
-                <input type="number" placeholder='Prijs in euro' onChange={(e) => setPrice(e.target.value)}/>
+                <input type="number" value={price} placeholder='Prijs in euro' onChange={(e) => setPrice(e.target.value)}/>
 
-                <select onChange={(e) => setCategory(e.target.value)}>
+                <select value={category} onChange={(e) => setCategory(e.target.value)}>
                     <option value="mobile">Mobiele Airco</option>
                     <option value="monoblock">Monoblock</option>
                     <option value="monosplit">Monosplit</option>
@@ -68,9 +81,9 @@ const AddProduct = () => {
 
                 <input type='file' className="file-input file-input-pdf" onChange={(e) => imageSelection(e)} />
 
-                <button className='edit-home-save' onClick={createProduct}>{cpMessage ? cpMessage : 'Product aanmaken'}</button>
+                <button className='edit-home-save' onClick={updateProduct}>{cpMessage ? cpMessage : 'Product opslaan'}</button>
             </div>
         </div>
     )
 }
-export default AddProduct;
+export default EditProduct;

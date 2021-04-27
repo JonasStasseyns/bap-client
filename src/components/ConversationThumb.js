@@ -1,8 +1,10 @@
 import React, {useEffect, useState} from 'react'
+import {getUrlById} from "../services/firebase";
 
 const ConversationThumb = (props) => {
 
     const [corr, setCorr] = useState(false)
+    const [image, setImage] = useState(false)
 
 
     useEffect(() => {
@@ -18,13 +20,22 @@ const ConversationThumb = (props) => {
         setCorr(obj)
     }, [])
 
+    useEffect(() => loadImage(), [corr])
+
+    const loadImage = async () => setImage(await getUrlById(corr.id))
+
     const openConversation = () => window.location = '/messages/'+corr.id
 
     return (
         <button className='conversation-thumb-button' onClick={openConversation}>
             <div className="conversation-thumb-container">
-                <h3>{corr && corr.name}</h3>
-                <p dangerouslySetInnerHTML={{__html: props.data.lastMessage}}/>
+                <div>
+                    <img src={image && image} alt=""/>
+                </div>
+                <div>
+                    <h3>{corr && corr.name}</h3>
+                    <p dangerouslySetInnerHTML={{__html: props.data.lastMessage}}/>
+                </div>
             </div>
         </button>
     )

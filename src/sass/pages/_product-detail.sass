@@ -1,31 +1,103 @@
 .product-detail-wrapper
   display: flex
   justify-content: space-between
+  @media (max-width: 1000px)
+    flex-direction: column-reverse
 
 .product-detail-main-container
   width: 60%
   padding: 2vw 0
   box-sizing: border-box
+  @media (max-width: 1000px)
+    width: 100%
   .product-detail-desc
     text-align: justify
+    line-height: 150%
 
 .product-detail-sidebar
-  padding: 2vw
-  box-sizing: border-box
-  margin-top: 5vh
+  display: flex
+  flex-direction: column
   width: 30%
-  box-shadow: 0 0 3px rgba(0, 0, 0, 0.3)
+  height: 100%
+  @media (max-width: 1000px)
+    flex-direction: row
+    width: 100%
+    justify-content: space-between
+  @media (max-width: 600px)
+    flex-direction: column
+  .sidebar-order-info
+    padding: 2vw
+    box-sizing: border-box
+    margin-top: 5vh
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.3)
+    @media (max-width: 1000px)
+      width: 40%
+    @media (max-width: 600px)
+      width: 100%
+    button
+      padding: 1vh 2vh 1.2vh 2vh
+      border: 0
+      color: #FAFAFA
+      background-color: $color-secondary
+      font-weight: bold
+      font-variant-caps: all-small-caps
+    h2
+      font-size: 2em
+      font-variant-caps: all-small-caps
+      color: $color-primary
+      font-weight: bold
+      margin-top: 0
+    h3
+      font-size: 1.5em
+      font-weight: bold
+      margin-top: 5vh
+      span
+        font-size: 1em
+        font-weight: normal
+        font-size: 0.5em
+    ul li
+      line-height: 150%
 
-.product-detail-sidebar h3
-  font-size: 1.5em
-  font-weight: bold
-  margin-top: 5vh
+  .specs
+    padding: 2vw
+    @media (max-width: 1000px)
+      margin-top: 3vh
+      width: 40%
+    @media (max-width: 600px)
+      width: 100%
+    h4
+      font-weight: bold
+      font-variant-caps: all-small-caps
+      font-size: 1.2em
+      color: $color-secondary
+    .specs-value-container
+      display: flex
+      flex-direction: column
+    .spec-row
+      display: flex
+      margin-bottom: 1vh
+      justify-content: space-between
+      div:first-child
+        font-weight: bold
+        width: 45%
+        font-variant-caps: all-small-caps
+        //font-size: 1.2em
+        background-color: $color-secondary
+        color: #FAFAFA
+        border-radius: 1vw
+      div
+        width: 45%
+        padding: 0.5vh 0 0.6vh 1vw
+        @media (max-width: 600px)
+          width: 40%
+
 
 .product-detail-sidebar ul
   padding: 0
 
 .product-detail-sidebar ul li
   list-style: none
+
 
 .product-detail-main-container h2
   font-size: 2.5em
@@ -42,10 +114,3 @@
 
 .product-detail-main-container img
   width: 100%
-
-figure.table
-  margin: 0
-
-figure table tbody tr td
-  background-color: #AAAAAA
-  padding: 0.5vw 3vw

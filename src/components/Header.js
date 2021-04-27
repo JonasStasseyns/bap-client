@@ -10,11 +10,20 @@ const Header = () => {
     // TODO Add register button next to login when not authenticated
 
     const [showMenu, setShowMenu] = useState(false)
+    const [cartSize, setCartSize] = useState('')
 
     const closeMobileMenu = () => setShowMenu(false)
     const openMobileMenu = () => setShowMenu(true)
 
-    useEffect(() => console.log(!!verifyJWT()), [])
+    useEffect(() => {
+        try {
+            const cart = JSON.parse(localStorage.getItem('cart'))
+            if (cart.length) setCartSize(cart.length)
+        }catch (err){
+            console.log("cart is empty or non-existing")
+        }
+        console.log(!!verifyJWT())
+    }, [])
 
     return (
         <div className='nav'>
@@ -27,7 +36,7 @@ const Header = () => {
                     <a href='/techs' className='nav-link'>Installateurs</a>
                     <a href='/wizard' className='nav-link'>Waar begin ik?</a>
                     <a href='/messages' className='nav-link'>Berichten</a>
-                    <a href='/cart' className='nav-link'>Winkelwagen</a>
+                    <a href='/cart' className='nav-link'>Winkelwagen ({cartSize})</a>
                     {verifyJWT() ? <a href='/auth/account' className='nav-link'>Account</a> : ''}
                     {verifyJWT() ? <a href='/auth/logout' className='nav-link'>Uitloggen</a> : <a href='/auth/login' className='nav-link'>Log in</a>}
                 </div>

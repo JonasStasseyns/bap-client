@@ -28,6 +28,7 @@ const Register = (props) => {
     const [image, setImage] = useState('https://media.istockphoto.com/vectors/profile-placeholder-image-gray-silhouette-no-photo-vector-id1016744004?k=6&m=1016744004&s=170667a&w=0&h=dsibM8vNYIJDN1wtB8SWex8M99vl6a9NoDsobZ9dUCo=')
 
     const [userType, setUserType] = useState('user')
+    const [allowedJobs, setAllowedJobs] = useState({start: false, install: false, all: false})
     const [error, setError] = useState('')
 
 
@@ -37,11 +38,14 @@ const Register = (props) => {
         if(password !== repeatPassword) return setError('Wachtwoorden komen niet overeen')
         axios.post(`${API_ROOT}/auth/register`, {email, password, firstName, lastName, address, country, phone}).then(res => {
             console.log(res.data.data.user._id)
-            if(userType === "user" && image) uploadProfilePicture(image).then(res => window.location = '/auth/login')
-            if(userType === "tech") axios.post(`${API_ROOT}/techs/create`, {hourlyRate, city, firstName, lastName, company, description, userId: res.data.data.user._id}).then(res => {
-                console.log(res)
-                if(image) uploadTechPicture(image, res.data._id).then(res => window.location = '/auth/login')
-            }).catch(err => console.log(err))
+            uploadProfilePicture(image)
+            if(userType === "tech"){
+                axios.post(`${API_ROOT}/techs/create`, {hourlyRate, city, firstName, lastName, company, description, allowedJobs:JSON.stringify(allowedJobs), userId: res.data.data.user._id}).then(res => {
+                    console.log(res)
+                }).catch(err => console.log(err))
+            } else {
+
+            }
         }).catch(err => console.log(err))
     }
 
@@ -72,7 +76,13 @@ const Register = (props) => {
                     <div className="form-fields-container">
                         <input type="text" placeholder='Prijs per uur' onChange={(e) => setHourlyRate(e.target.value)}/>
                         <input type="text" placeholder='Bedrijfsnaam' onChange={(e) => setCompany(e.target.value)}/>
-                        <input type="text" placeholder='Beschrijving' onChange={(e) => setDescription(e.target.value)}/>
+                        <textarea placeholder='Beschrijving' onChange={(e) => setDescription(e.target.value)}/>
+                        <h3 className="allowed-title">Welke werken aanvaard u? (min. 1)</h3>
+                        <div className="register-tech-allowed-container">
+                            <div className={"allow-item " + (allowedJobs.start ? "allowed":"declined")} onClick={() => setAllowedJobs({...allowedJobs,  start: !allowedJobs.start})}>Opstart</div>
+                            <div className={"allow-item " + (allowedJobs.install ? "allowed":"declined")} onClick={() => setAllowedJobs({...allowedJobs,  install: !allowedJobs.install})}>Installatie</div>
+                            <div className={"allow-item " + (allowedJobs.all ? "allowed":"declined")} onClick={() => setAllowedJobs({...allowedJobs,  all: !allowedJobs.all})}>Installatie & opstart</div>
+                        </div>
                     </div>
                     }
 
@@ -81,5 +91,5 @@ const Register = (props) => {
             </div>
         </div>
     )
-}
+};
 export default Register

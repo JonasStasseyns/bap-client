@@ -23,6 +23,8 @@ import Logout from "./pages/auth/Logout";
 import Cart from "./pages/Products/Cart";
 import Payment from "./pages/Payment"
 import PasswordReset from "./pages/auth/PasswordReset";
+import Advice from "./pages/auth/Advice"
+import EditProduct from "./pages/admin/editProduct";
 
 function App() {
 
@@ -58,8 +60,10 @@ function App() {
                     <Route path='/auth/socket-login/:sid' exact component={SocketLogin} />
                     <Route path='/auth/reset-password/:token' exact component={PasswordReset} />
                     <Route path='/auth/account' exact render={() => (verifyJWT() ? (<Account />):(<Redirect to="/auth/login" destination='auth/account'/>))} />
+                    <Route path='/auth/account/advice' exact render={() => (verifyJWT() ? (<Advice />):(<Redirect to="/auth/login" destination='auth/account'/>))} />
 
                     <Route path='/admin/add-product' exact render={() => (verifyJWT() ? (<AddProduct />):(<Redirect to="/auth/login" destination='admin/add-product'/>))} />
+                    <Route path='/admin/edit-product/:id' exact render={() => (verifyJWT() ? (<EditProduct />):(<Redirect to="/auth/login" destination='admin/add-product'/>))} />
 
                     <Route path='/wizard' exact component={Wizard} />
 

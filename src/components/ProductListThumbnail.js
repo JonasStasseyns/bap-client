@@ -26,7 +26,8 @@ const ProductListThumbnail = (props) => {
 
                 <div className="product-list-thumbnail-content">
                     <h3 className="product-list-thumbnail-title">{product.title}</h3>
-                    <p className="product-list-thumbnail-excerpt" dangerouslySetInnerHTML={{__html: product.description.substring(0, 200)+"..."}}/>
+                    {/*<p className="product-list-thumbnail-excerpt" dangerouslySetInnerHTML={{__html: product.description.substring(0, 200)+"..."}}/>*/}
+                    <p className="product-list-thumbnail-excerpt">{product.description.replace( /(<([^>]+)>)/ig, '').substring(0, 200)}</p>
                     <h4 className="product-list-thumbnail-price">&euro; {product.price}</h4>
                 </div>
 

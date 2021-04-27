@@ -10,6 +10,35 @@
   flex-wrap: wrap
   @media (max-width: $content-md)
     flex-direction: column
+  .allowed-title
+    font-size: 1.5em
+    font-variant-caps: all-small-caps
+    font-weight: bold
+    color: $color-secondary
+  .register-tech-allowed-container
+    width: 100%
+    display: flex
+    justify-content: space-between
+    margin-bottom: 3vh
+    .allow-item
+      padding: 1vw
+      border-radius: 1vw
+      font-variant-caps: all-small-caps
+      font-weight: bold
+      font-size: 1.1em
+    .allowed
+      border: 2px solid $color-secondary
+      background-color: $color-secondary
+      color: #FAFAFA
+    .declined
+      border: 2px solid $color-primary
+      opacity: 0.2
+  textarea
+    width: 100%
+    padding: 1vw
+    border: 0
+    border-bottom: 1px solid #CCCCCC
+    margin-bottom: 1vh
 
 .form-fields-container input
   margin: 1vh 0
