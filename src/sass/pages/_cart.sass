@@ -30,8 +30,10 @@
 .cart-wrapper
   display: flex
   justify-content: space-between
-  .product-list-container, .address-details
-    width: 45%
+  .product-list-container
+    width: 55%
+  .address-details
+    width: 40%
   h1
     color: $color-primary
     font-variant-caps: all-small-caps
@@ -40,7 +42,6 @@
   .address-details
     display: flex
     flex-direction: column
-    width: 50%
     p
       text-align: justify
       line-height: 150%
@@ -53,18 +54,43 @@
       margin: 2vh 0 0 0
     h3
       margin: 1vh 0
-
+    h4
+      font-variant-caps: all-small-caps
+      color: $color-secondary
+      font-weight: bold
+      font-size: 1.3em
+      margin: 2vh 0 0 0
     .address-fields
       display: flex
       flex-direction: row
       flex-wrap: wrap
-      width: 30%
-
+      justify-content: space-between
+      width: 100%
       input
         padding: 0.5vw 1vw
-        margin: 1vh 1vw 1vh 0
+        margin: 1vh 0
         border: 0
+        width: 43%
         border-bottom: 1px solid #AAAAAA
+    button
+      display: flex
+      justify-content: center
+      align-items: center
+      background-color: $color-secondary
+      border: 0
+      color: #FAFAFA
+      padding: 1.5vh 0 1.7vh 0
+      margin-top: 3vh
+      cursor: pointer
+      border-radius: 5px
+      &:hover
+        background-color: $color-secondary-light
+      p
+        font-variant-caps: all-small-caps
+        font-weight: bold
+        margin: 0
+        margin-left: 1vw
+        font-size: 1.5em
 
 .fa-delete
   cursor: pointer

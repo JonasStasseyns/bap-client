@@ -3,7 +3,8 @@ import axios from 'axios'
 import {getUrlById} from "../../services/firebase";
 import CartItem from "../../components/CartItem";
 import {authPolice, decodeJWT} from "../../utils/JWT";
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faLock } from '@fortawesome/free-solid-svg-icons'
 
 
 const API_ROOT = process.env.REACT_APP_API_BASE
@@ -77,13 +78,17 @@ const Cart = (props) => {
                 <p>Standaard leveren wij op het adres dat u invoerde bij het registreren. Wil u aan ander leveringsadres opgeven? Dan kan dit hieronder.</p>
                 <h2>Huidig adres</h2>
                 <h3 className="current-address">{user && user.address}</h3>
+                <h4>Aangepast leveringsadres (optioneel)</h4>
                 <div className="address-fields">
                     <input type="text" placeholder='Straat + huisnummer' onChange={(e) => setFirstName(e.target.value)}/>
                     <input type="text" placeholder='Postcode' onChange={(e) => setLastName(e.target.value)}/>
                     <input type="text" placeholder='Plaats' onChange={(e) => setAddress(e.target.value)}/>
                     <input type="text" placeholder='Land' onChange={(e) => setCountry(e.target.value)}/>
                 </div>
-                <button onClick={createPayment}>Betalen</button>
+                <button onClick={createPayment}>
+                    <FontAwesomeIcon icon={faLock}/>
+                    <p>Bestelling afronden</p>
+                </button>
             </div>
         </div>
     )
