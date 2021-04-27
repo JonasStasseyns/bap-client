@@ -19,10 +19,10 @@ const Cart = (props) => {
     const [email, setEmail] = useState(false)
     const [password, setPassword] = useState(false)
     const [firstName, setFirstName] = useState(false)
-    const [lastName, setLastName] = useState(false)
-    const [address, setAddress] = useState(false)
+    const [city, setCity] = useState(false)
+    const [postal, setPostal] = useState(false)
     const [country, setCountry] = useState(false)
-    const [phone, setPhone] = useState(false)
+    const [streetAndNum, setStreetAndNum] = useState(false)
     const [total, setTotal] = useState(0)
 
     useEffect( () => {
@@ -50,7 +50,8 @@ const Cart = (props) => {
             total,
             products: JSON.stringify(products),
             uid: JWT.userId,
-            status: "pending"
+            status: "pending",
+            address: (streetAndNum && postal && city && country ? streetAndNum+', '+postal+' '+city+', '+country:false)
         }).then(res => {
             console.log(res)
             console.log(res.data._links.checkout)
@@ -80,9 +81,9 @@ const Cart = (props) => {
                 <h3 className="current-address">{user && user.address}</h3>
                 <h4>Aangepast leveringsadres (optioneel)</h4>
                 <div className="address-fields">
-                    <input type="text" placeholder='Straat + huisnummer' onChange={(e) => setFirstName(e.target.value)}/>
-                    <input type="text" placeholder='Postcode' onChange={(e) => setLastName(e.target.value)}/>
-                    <input type="text" placeholder='Plaats' onChange={(e) => setAddress(e.target.value)}/>
+                    <input type="text" placeholder='Straat + huisnummer' onChange={(e) => setStreetAndNum(e.target.value)}/>
+                    <input type="text" placeholder='Postcode' onChange={(e) => setPostal(e.target.value)}/>
+                    <input type="text" placeholder='Plaats' onChange={(e) => setCity(e.target.value)}/>
                     <input type="text" placeholder='Land' onChange={(e) => setCountry(e.target.value)}/>
                 </div>
                 <button onClick={createPayment}>

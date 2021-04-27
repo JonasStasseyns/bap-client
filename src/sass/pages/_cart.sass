@@ -30,10 +30,16 @@
 .cart-wrapper
   display: flex
   justify-content: space-between
+  @media (max-width: 900px)
+    flex-direction: column
   .product-list-container
     width: 55%
+    @media (max-width: 900px)
+      width: 100%
   .address-details
     width: 40%
+    @media (max-width: 900px)
+      width: 100%
   h1
     color: $color-primary
     font-variant-caps: all-small-caps
@@ -94,3 +100,5 @@
 
 .fa-delete
   cursor: pointer
+  @media (max-width: 900px)
+    margin-right: 1vh

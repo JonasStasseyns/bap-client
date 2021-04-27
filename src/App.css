@@ -683,11 +683,26 @@
   display: flex;
   justify-content: space-between;
 }
+@media (max-width: 900px) {
+  .cart-wrapper {
+    flex-direction: column;
+  }
+}
 .cart-wrapper .product-list-container {
   width: 55%;
 }
+@media (max-width: 900px) {
+  .cart-wrapper .product-list-container {
+    width: 100%;
+  }
+}
 .cart-wrapper .address-details {
   width: 40%;
+}
+@media (max-width: 900px) {
+  .cart-wrapper .address-details {
+    width: 100%;
+  }
 }
 .cart-wrapper h1 {
   color: #FC6767;
@@ -760,6 +775,11 @@
 
 .fa-delete {
   cursor: pointer;
+}
+@media (max-width: 900px) {
+  .fa-delete {
+    margin-right: 1vh;
+  }
 }
 
 .wizard-container {
