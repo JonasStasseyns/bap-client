@@ -69,8 +69,9 @@ const Cart = (props) => {
                 <h1>Winkelwagen</h1>
                 <div className="cart-product-list">
                     {products && products.map((product, key) => <CartItem product={product} key={key} index={key} deleteFromCart={deleteFromCart()} />)}
+                    {products && products.length === 0 && <p>Geen producten</p>}
                     <div className="cart-total-row">
-                        <div className="cart-total-price">Totaal {total && '€'+total}</div>
+                        <div className="cart-total-price">Totaal €{total && total}</div>
                     </div>
                 </div>
             </div>
@@ -86,9 +87,9 @@ const Cart = (props) => {
                     <input type="text" placeholder='Plaats' onChange={(e) => setCity(e.target.value)}/>
                     <input type="text" placeholder='Land' onChange={(e) => setCountry(e.target.value)}/>
                 </div>
-                <button onClick={createPayment}>
+                <button onClick={createPayment} disabled={products && products.length === 0}>
                     <FontAwesomeIcon icon={faLock}/>
-                    <p>Bestelling afronden</p>
+                    <p>{products.length === 0 ? 'Winkelwagen is leeg':'Bestelling afronden'}</p>
                 </button>
             </div>
         </div>

@@ -1,18 +1,83 @@
 .home-wrapper
-  background-color: red
+  //background-color: red
+  background-image: url("https://firebasestorage.googleapis.com/v0/b/bachelorproef-b2b80.appspot.com/o/pexels-max-vakhtbovych-6480212.jpg?alt=media&token=f185c9b3-2079-4bf2-99f7-c0d67367d6c5")
+  background-size: cover
+  height: 100vh
   .banner
-    background-color: green
+    //background-color: green
+
     display: flex
     justify-content: space-between
+
     div
       width: 50%
-      padding: 5vw
+      padding: 10vw 4vw
       box-sizing: border-box
+
       h1
-        font-size: 2.5em
+        font-size: 3em
         font-weight: bold
         font-variant-caps: all-small-caps
         margin: 0
       h3
-        color: red
+        color: $color-primary
         margin: 0
+        font-variant-caps: all-small-caps
+        font-size: 1.5em
+        font-weight: bold
+
+  .home-main-content
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1)
+    background-color: white
+    padding: 2vw 0
+
+    .home-text
+      width: 100%
+      max-width: 1400px
+      margin: 0 auto
+      display: flex
+      justify-content: space-between
+      @media (max-width: 1450px)
+        padding: 1vh 3vw
+        box-sizing: border-box
+      div
+        width: 49%
+        text-align: justify
+        //&:nth-child(2)
+          //background-color: red
+      h1
+        font-size: 2em
+        font-variant-caps: all-small-caps
+        color: $color-primary
+        font-weight: bold
+        margin-bottom: 0
+      h2
+        font-size: 1.4em
+        margin-top: 0
+        font-variant-caps: all-small-caps
+        color: $color-secondary
+        font-weight: bold
+    .home-product-list-container
+      padding: 3vw
+      width: 100%
+      max-width: 1400px
+      margin: 0 auto
+      box-sizing: border-box
+      h1
+        font-size: 2em
+        font-variant-caps: all-small-caps
+        color: $color-primary
+        font-weight: bold
+        margin-bottom: 2vh
+      .home-product-list
+        display: flex
+        justify-content: space-between
+        .home-plt
+          width: 30%
+          margin: 0
+          height: unset
+          .product-list-thumbnail
+            height: 20vh
+            img
+              height: 100%
+              object-fit: contain

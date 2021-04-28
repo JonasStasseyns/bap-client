@@ -3,11 +3,33 @@
   height: 93vh
   box-sizing: border-box
   display: flex
+  overflow: hidden
+  @media (max-width: 900px)
+    flex-direction: column
+    height: 92vh
 
 .conversations-section
   border-right: 1px solid #CCC
   width: 30%
   height: 100%
+  @media (max-width: 900px)
+    width: 100%
+    display: none
+
+.show-conv
+  display: block
+
+.show-hide-conversations
+  border: 0
+  padding: 1.5vh 0 1.7vh 0
+  background-color: $color-secondary
+  color: #FAFAFA
+  font-weight: bold
+  font-variant-caps: all-small-caps
+  font-size: 1.5em
+  display: none
+  @media (max-width: 900px)
+    display: inline-block
 
 .chat-section
   width: 70%
@@ -15,10 +37,14 @@
   display: flex
   flex-direction: column
   justify-content: space-between
+  @media (max-width: 900px)
+    width: 100%
 
 .chat-title-bar
   padding: 1vw
   text-align: center
+  @media (max-width: 900px)
+    padding: 2vh
 
 .chat-messages-container
   height: 100%
@@ -33,11 +59,23 @@
     width: 100%
     border: 0
     padding: 2vw 1vw
+  @media (max-width: 800px)
+    height: 10%
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1)
+    position: fixed
+    bottom: 0
+    width: 100vw
+    textarea
+      padding: 4vw
 
 .messages-send-button
   width: 10%
   border-radius: 0
   border: 0
+  @media (max-width: 1000px)
+    width: 20%
+  @media (max-width: 800px)
+    width: 30%
 
 .ck-editor
   width: 100% !important

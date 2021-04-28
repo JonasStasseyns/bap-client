@@ -20,9 +20,9 @@ const ConversationThumb = (props) => {
         setCorr(obj)
     }, [])
 
-    useEffect(() => loadImage(), [corr])
-
-    const loadImage = async () => setImage(await getUrlById(corr.id))
+    // useEffect(() => loadImage(), [corr])
+    //
+    // const loadImage = async () => setImage(await getUrlById(corr.id))
 
     const openConversation = () => window.location = '/messages/'+corr.id
 
@@ -30,7 +30,7 @@ const ConversationThumb = (props) => {
         <button className='conversation-thumb-button' onClick={openConversation}>
             <div className="conversation-thumb-container">
                 <div>
-                    <img src={image && image} alt=""/>
+                    {/*<img src={image && image} alt=""/>*/}
                 </div>
                 <div>
                     <h3>{corr && corr.name}</h3>

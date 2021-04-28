@@ -1,16 +1,15 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import './App.css';
 import Header from "./components/Header";
 import Home from "./pages/Home"
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 import TechnicianList from "./pages/Technicians/TechnicianList";
-import openSocket from 'socket.io-client'
 import TechnicianDetail from "./pages/Technicians/TechnicianDetail";
 import ProductList from "./pages/Products/ProductList";
 import ProductDetail from "./pages/Products/ProductDetail";
 import Login from "./pages/auth/Login";
 import Account from "./pages/auth/Account";
-import {decodeJWT, verifyJWT} from "./utils/JWT";
+import {verifyJWT} from "./utils/JWT";
 import Redirect from "./utils/Redirect";
 import SocketLogin from "./pages/auth/SocketLogin";
 import Wizard from './pages/Wizard'
@@ -25,57 +24,56 @@ import Payment from "./pages/Payment"
 import PasswordReset from "./pages/auth/PasswordReset";
 import Advice from "./pages/auth/Advice"
 import EditProduct from "./pages/admin/editProduct";
+import {socket, SocketContext} from './context/socket';
+
 
 function App() {
-
-
-    const socket = openSocket(process.env.REACT_APP_SOCKET)
-    const userData = decodeJWT()
-    socket.on('connect', () => {
-        if(userData !== null) socket.emit('register-chat', userData.userId)
-    })
-
-
-
-    console.log(verifyJWT())
     return (
-        <div className="App">
-            <Header/>
-            <Router>
-                <Switch>
-                    <Route path='/' exact component={Home} />
+        <SocketContext.Provider value={socket}>
+            <div className="App">
+                <Header/>
+                <Router>
+                    <Switch>
+                        <Route path='/' exact component={Home}/>
 
-                    <Route path='/products' exact component={ProductList} />
-                    <Route path='/products/:id' exact component={ProductDetail} />
-                    <Route path='/cart' exact component={Cart} />
+                        <Route path='/products' exact component={ProductList}/>
+                        <Route path='/products/:id' exact component={ProductDetail}/>
+                        <Route path='/cart' exact component={Cart}/>
 
-                    <Route path='/techs' exact component={TechnicianList} />
-                    <Route path='/techs/:id' exact component={TechnicianDetail} />
-                    <Route path='/techs/manage' exact component={TechnicianManagement} />
+                        <Route path='/techs' exact component={TechnicianList}/>
+                        <Route path='/techs/:id' exact component={TechnicianDetail}/>
+                        <Route path='/techs/manage' exact component={TechnicianManagement}/>
 
-                    <Route path='/auth/register' exact component={Register} />
-                    <Route path='/auth/login' exact component={Login} />
-                    <Route path='/auth/logout' exact component={Logout} />
-                    <Route path='/auth/login/:destination' exact component={Login} />
-                    <Route path='/auth/socket-login/:sid' exact component={SocketLogin} />
-                    <Route path='/auth/reset-password/:token' exact component={PasswordReset} />
-                    <Route path='/auth/account' exact render={() => (verifyJWT() ? (<Account />):(<Redirect to="/auth/login" destination='auth/account'/>))} />
-                    <Route path='/auth/account/advice' exact render={() => (verifyJWT() ? (<Advice />):(<Redirect to="/auth/login" destination='auth/account'/>))} />
+                        <Route path='/auth/register' exact component={Register}/>
+                        <Route path='/auth/login' exact component={Login}/>
+                        <Route path='/auth/logout' exact component={Logout}/>
+                        <Route path='/auth/login/:destination' exact component={Login}/>
+                        <Route path='/auth/socket-login/:sid' exact component={SocketLogin}/>
+                        <Route path='/auth/reset-password/:token' exact component={PasswordReset}/>
+                        <Route path='/auth/account' exact render={() => (verifyJWT() ? (<Account/>) : (
+                            <Redirect to="/auth/login" destination='auth/account'/>))}/>
+                        <Route path='/auth/account/advice' exact render={() => (verifyJWT() ? (<Advice/>) : (
+                            <Redirect to="/auth/login" destination='auth/account'/>))}/>
 
-                    <Route path='/admin/add-product' exact render={() => (verifyJWT() ? (<AddProduct />):(<Redirect to="/auth/login" destination='admin/add-product'/>))} />
-                    <Route path='/admin/edit-product/:id' exact render={() => (verifyJWT() ? (<EditProduct />):(<Redirect to="/auth/login" destination='admin/add-product'/>))} />
+                        <Route path='/admin/add-product' exact render={() => (verifyJWT() ? (<AddProduct/>) : (
+                            <Redirect to="/auth/login" destination='admin/add-product'/>))}/>
+                        <Route path='/admin/edit-product/:id' exact render={() => (verifyJWT() ? (<EditProduct/>) : (
+                            <Redirect to="/auth/login" destination='admin/add-product'/>))}/>
 
-                    <Route path='/wizard' exact component={Wizard} />
+                        <Route path='/wizard' exact component={Wizard}/>
 
-                    <Route path='/messages' exact render={() => (verifyJWT() ? (<Messages socket={socket} />):(<Redirect to="/auth/login"/>))} />
-                    <Route path='/messages/:correspondant' exact render={() => (verifyJWT() ? (<Messages socket={socket} />):(<Redirect to="/auth/login"/>))} />
+                        <Route path='/messages' exact
+                               render={() => (verifyJWT() ? (<Messages/>) : (<Redirect to="/auth/login"/>))}/>
+                        <Route path='/messages/:correspondant' exact
+                               render={() => (verifyJWT() ? (<Messages/>) : (<Redirect to="/auth/login"/>))}/>
 
-                    <Route path='/payment' exact render={Payment} />))} />
+                        <Route path='/payment' exact render={Payment}/>))} />
 
-                    <Route component={CatchAll}/>
-                </Switch>
-            </Router>
-        </div>
+                        <Route component={CatchAll}/>
+                    </Switch>
+                </Router>
+            </div>
+        </SocketContext.Provider>
     )
 }
 

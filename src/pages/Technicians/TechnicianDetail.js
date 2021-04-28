@@ -8,7 +8,10 @@ const TechnicianDetail = (props) => {
 
     const [tech, setTech] = useState(false)
 
-    useEffect(() => axios.get(`${API_ROOT}/techs/get/${props.match.params.id}`).then(res => setTech(res.data)).catch(err => console.log(err)), [])
+    useEffect(() => axios.get(`${API_ROOT}/techs/get/${props.match.params.id}`).then(res => {
+        console.log(res)
+        setTech(res.data)
+    }).catch(err => console.log(err)), [])
 
 
 
@@ -19,9 +22,9 @@ const TechnicianDetail = (props) => {
                 <h4>{tech && tech.category}</h4>
                 {/*<img src={image} alt={image}/>*/}
                 <h4>Beschrijving</h4>
-                <p className="product-detail-desc" dangerouslySetInnerHTML={{__html: tech.description}}/>
+                {tech && <p className="product-detail-desc" dangerouslySetInnerHTML={{__html: tech.description}}/>}
                 <h4>Specificaties</h4>
-                <p className="product-detail-specs" dangerouslySetInnerHTML={{__html: tech.specs}}/>
+                {tech && <p className="product-detail-specs" dangerouslySetInnerHTML={{__html: tech.specs}}/>}
             </div>
             <div className="product-detail-sidebar">
                 <h3>{tech && tech.price}</h3>
@@ -31,9 +34,9 @@ const TechnicianDetail = (props) => {
                     <li>Gratis verzending</li>
                 </ul>
                 {tech && (tech.firstName + ' ' + tech.lastName)}
-                <Link to={"/messages/"+tech.userId}>
+                {tech && <Link to={"/messages/"+tech.userId}>
                     <button className="contact-tech">Contacteer {tech.firstName}</button>
-                </Link>
+                </Link>}
             </div>
         </div>
     )

@@ -17,7 +17,7 @@ const TechnicianListThumbnail = (props) => {
     }
 
     return (
-        <a href={"/products/" + tech._id} className="product-list-thumbnail-link">
+        <a href={"/techs/" + tech._id} className="product-list-thumbnail-link">
             <div className="product-list-thumbnail tech-thumb">
 
                 <img className="product-list-thumbnail-image" src={image ? image : placeholder} alt={image} />
