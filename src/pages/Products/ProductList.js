@@ -22,19 +22,14 @@ const ProductList = () => {
     ]
 
     useEffect(() => axios.get(`${API_ROOT}/products`).then(res => {
-        console.log(res.data)
         setProducts(res.data)
     }).catch(err => console.log(err)), [])
 
     const searchProducts = () => axios.post(`${API_ROOT}/products/query`, query).then(res => {
-        console.log(res)
         setProducts(res.data)
     }).catch(err => console.log(err))
 
-    useEffect(() => {
-        console.log(query)
-        searchProducts()
-    }, [query])
+    useEffect(() => searchProducts(), [query])
 
     return (
         <div className="generic-wrapper product-list-wrapper">
@@ -54,7 +49,6 @@ const ProductList = () => {
                     <option value={0}>Relevantie</option>
                     <option value={1}>Prijs laag - hoog</option>
                     <option value={2}>Prijs hoog - laag</option>
-                    {/*<option value={orders}>Meest verkocht</option>*/}
                     <option value={3}>Alfabetisch A - Z</option>
                     <option value={4}>Alfabetisch Z - A</option>
                 </select>

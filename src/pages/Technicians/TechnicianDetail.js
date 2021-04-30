@@ -1,39 +1,40 @@
 import React, {useState, useEffect} from 'react'
 import axios from 'axios'
 import {Link} from "react-router-dom";
+import {getTechUrlById, getUrlById} from "../../services/firebase";
 
 const API_ROOT = process.env.REACT_APP_API_BASE
 
 const TechnicianDetail = (props) => {
 
-    const [tech, setTech] = useState(false)
+    const [allows, setAllows] = useState([])
 
-    useEffect(() => axios.get(`${API_ROOT}/techs/get/${props.match.params.id}`).then(res => {
-        console.log(res)
-        setTech(res.data)
-    }).catch(err => console.log(err)), [])
+    const tech = props.tech
 
 
+    useEffect(() => {
+        const jobs = JSON.parse(tech.allowedJobs)
+        Object.entries(jobs).forEach(([key,value])=>{
+            console.log(typeof value)
+            if(key === 'start' && value) setAllows(allows => [...allows, 'Opstart'])
+            if(key === 'install' && value) setAllows(allows => [...allows, 'Installatie'])
+            if(key === 'start' && value) setAllows(allows => [...allows, 'Volledig traject'])
+        })
+    }, []);
 
     return (
-        <div className="generic-wrapper product-detail-wrapper">
+        <div className="tech-detail-sidebar">
             <div className="tech-detail-main-container">
                 <h2>{tech && (tech.firstName + ' ' + tech.lastName)}</h2>
-                <h4>{tech && tech.category}</h4>
+                <h3>Aanvaarde klussen:</h3>
+                <div className="allowed-jobs">
+                    {(allows && allows.length > 0) ? allows.map((job, key) => <h4 key={key}>{job}</h4>) : ''}
+                </div>
                 {/*<img src={image} alt={image}/>*/}
-                <h4>Beschrijving</h4>
-                {tech && <p className="product-detail-desc" dangerouslySetInnerHTML={{__html: tech.description}}/>}
-                <h4>Specificaties</h4>
-                {tech && <p className="product-detail-specs" dangerouslySetInnerHTML={{__html: tech.specs}}/>}
-            </div>
-            <div className="product-detail-sidebar">
-                <h3>{tech && tech.price}</h3>
-                <ul>
-                    <li>Beschikbaar</li>
-                    <li>Geen opstart nodig</li>
-                    <li>Gratis verzending</li>
-                </ul>
-                {tech && (tech.firstName + ' ' + tech.lastName)}
+                <h3>Beschrijving</h3>
+                {tech && <p className="tech-detail-desc" dangerouslySetInnerHTML={{__html: tech.description}}/>}
+                <h3>Prijs per uur</h3>
+                {tech && <p className="product-detail-specs">€ {tech.hourlyRate}</p>}
                 {tech && <Link to={"/messages/"+tech.userId}>
                     <button className="contact-tech">Contacteer {tech.firstName}</button>
                 </Link>}

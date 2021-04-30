@@ -39,7 +39,7 @@ const Login = (props) => {
     }, [])
 
 
-    const login = () => axios.post(`${API_ROOT}/auth/login`, {email, password}).then(res => {
+    const login = () => axios.post(`${API_ROOT}/auth/login`, {email: email.toLowerCase(), password}).then(res => {
         cookies.set('jwt', res.data.token, {path: '/'});
         console.log(cookies.get('jwt')); // Pacman
         window.location = '/'

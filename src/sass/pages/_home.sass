@@ -43,8 +43,15 @@
       div
         width: 49%
         text-align: justify
-        //&:nth-child(2)
-          //background-color: red
+        @media (max-width: 1200px)
+          width: 60%
+        @media (max-width: 950px)
+          width: 100%
+        &:nth-child(2)
+          @media (max-width: 1200px)
+            width: 40%
+          @media (max-width: 950px)
+            display: none
       h1
         font-size: 2em
         font-variant-caps: all-small-caps

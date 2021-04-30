@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import {getUrlById} from "../services/firebase";
+import {getTechUrlById, getUrlById} from "../services/firebase";
 
 
 const TechnicianListThumbnail = (props) => {
@@ -12,24 +12,24 @@ const TechnicianListThumbnail = (props) => {
     useEffect( () => fetchImage(), [])
 
     const fetchImage = async () => {
-        const response = await getUrlById(tech._id);
+        const response = await getTechUrlById(tech._id);
         setImage(response);
     }
 
     return (
-        <a href={"/techs/" + tech._id} className="product-list-thumbnail-link">
+        <div className="product-list-thumbnail-link" onClick={() => props.selecter(props.tech)}>
             <div className="product-list-thumbnail tech-thumb">
 
                 <img className="product-list-thumbnail-image" src={image ? image : placeholder} alt={image} />
 
                 <div className="product-list-thumbnail-content">
                     <h3 className="product-list-thumbnail-title">{tech.firstName+' '+tech.lastName}</h3>
-                    <p className="product-list-thumbnail-excerpt" dangerouslySetInnerHTML={{__html: tech.description.substring(0, 200)+"..."}}/>
+                    <p className="product-list-thumbnail-excerpt tech-excerpt" dangerouslySetInnerHTML={{__html: tech.description.substring(0, 200)+"..."}}/>
                     <h4 className="product-list-thumbnail-price">&euro;{tech.hourlyRate}/uur</h4>
                 </div>
 
             </div>
-        </a>
+         </div>
     )
 }
 export default TechnicianListThumbnail

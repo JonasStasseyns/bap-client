@@ -34,3 +34,8 @@ export const getUrlById = (id) => {
     const ref = storage.child('products/' + id + '.jpg');
     return ref.getDownloadURL();
 };
+
+export const getTechUrlById = (id) => {
+    const ref = storage.child('techs/' + id + '.jpg');
+    return ref.getDownloadURL();
+};

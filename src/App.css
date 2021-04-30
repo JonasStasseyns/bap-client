@@ -574,7 +574,7 @@
 
 .chat-messages-container {
   height: 100%;
-  padding: 1vw;
+  padding: 1vw 1vw 10vh 1vw;
   border-bottom: 1px solid #CCC;
   overflow-y: scroll;
 }
@@ -1041,6 +1041,26 @@
   width: 49%;
   text-align: justify;
 }
+@media (max-width: 1200px) {
+  .home-wrapper .home-main-content .home-text div {
+    width: 60%;
+  }
+}
+@media (max-width: 950px) {
+  .home-wrapper .home-main-content .home-text div {
+    width: 100%;
+  }
+}
+@media (max-width: 1200px) {
+  .home-wrapper .home-main-content .home-text div:nth-child(2) {
+    width: 40%;
+  }
+}
+@media (max-width: 950px) {
+  .home-wrapper .home-main-content .home-text div:nth-child(2) {
+    display: none;
+  }
+}
 .home-wrapper .home-main-content .home-text h1 {
   font-size: 2em;
   font-variant-caps: all-small-caps;
@@ -1118,6 +1138,62 @@
   font-variant-caps: all-small-caps;
   font-weight: bold;
   color: #FC6767;
+}
+
+.tech-list-main {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.tech-list-main .product-list-actual {
+  width: 100%;
+}
+.tech-list-main .tech-detail-sidebar {
+  width: 30%;
+}
+.tech-list-main .tech-detail-sidebar .tech-detail-main-container {
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  margin-top: 2vw;
+  padding: 2vw;
+}
+.tech-list-main .tech-detail-sidebar .tech-detail-main-container h2 {
+  font-variant-caps: all-small-caps;
+  font-size: 1.5em;
+  font-weight: bold;
+  color: #FC6767;
+  margin-top: 1vh;
+}
+.tech-list-main .tech-detail-sidebar .tech-detail-main-container h3 {
+  font-variant-caps: all-small-caps;
+  font-size: 1.2em;
+  font-weight: bold;
+  color: #398FB5;
+  margin-top: 1vh;
+  margin-bottom: 0;
+}
+.tech-list-main .tech-detail-sidebar .tech-detail-main-container .allowed-jobs {
+  margin: 0 0 4vh 0;
+}
+.tech-list-main .tech-detail-sidebar .tech-detail-main-container .allowed-jobs h4 {
+  margin: 1vh 0;
+}
+.tech-list-main .tech-detail-sidebar .tech-detail-main-container .tech-detail-desc {
+  line-height: 150%;
+}
+.tech-list-main .tech-detail-sidebar .tech-detail-main-container .contact-tech {
+  background-color: #398FB5;
+  border: 0;
+  width: 100%;
+  padding: 1vh 0 1.5vh 0;
+  font-variant-caps: all-small-caps;
+  font-size: 1.5em;
+  font-weight: bold;
+  color: white;
+}
+
+.tech-excerpt {
+  width: 100%;
+  word-wrap: break-word;
 }
 
 * {
