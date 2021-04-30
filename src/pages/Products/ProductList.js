@@ -1,6 +1,7 @@
-import React, {useState, useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import axios from 'axios'
 import ProductListThumbnail from "../../components/ProductListThumbnail";
+import {decodeJWT, verifyJWT} from "../../utils/JWT";
 
 const API_ROOT = process.env.REACT_APP_API_BASE
 
@@ -21,21 +22,45 @@ const ProductList = () => {
         {title: -1}
     ]
 
-    useEffect(() => axios.get(`${API_ROOT}/products`).then(res => {
-        setProducts(res.data)
-    }).catch(err => console.log(err)), [])
+    useEffect(() => {
+        if (window.location.pathname === '/products/advice') {
+            if (verifyJWT()) {
+                console.log('attempt get')
+                axios.get(process.env.REACT_APP_API_BASE + '/advice/' + decodeJWT().userId).then(res => {
+                    console.log(res)
+                    setProducts(res.data)
+                })
+            } else if (localStorage.getItem('advice')) {
+                axios.post(process.env.REACT_APP_API_BASE + '/advice/manual', JSON.parse(localStorage.getItem('advice'))).then(res => {
+                    console.log(res)
+                    setProducts(res.data)
+                })
+            }
+            console.log('advice')
+        } else {
+            console.log('regular fetch all')
+            axios.get(`${API_ROOT}/products`).then(res => {
+                setProducts(res.data)
+            }).catch(err => console.log(err))
+        }
 
-    const searchProducts = () => axios.post(`${API_ROOT}/products/query`, query).then(res => {
-        setProducts(res.data)
-    }).catch(err => console.log(err))
+    }, [])
+
+    const searchProducts = () => {
+        if (query.filter || query.search || query.sort) axios.post(`${API_ROOT}/products/query`, query).then(res => {
+            setProducts(res.data)
+            console.log('Query used')
+        }).catch(err => console.log(err))
+    }
 
     useEffect(() => searchProducts(), [query])
 
     return (
         <div className="generic-wrapper product-list-wrapper">
-            <h1>Airconditioning toestellen</h1>
+            <h1>Airconditioning toestellen {(window.location.pathname === '/products/advice') ? '(op basis van uw voorkeuren)': ''}</h1>
             <div className="product-list-filter-container">
-                <input type="text" placeholder="Zoekterm..." className="product-list-filter-search-input" onChange={(e) => setQuery({...query, search: e.target.value})}/>
+                <input type="text" placeholder="Zoekterm..." className="product-list-filter-search-input"
+                       onChange={(e) => setQuery({...query, search: e.target.value})}/>
                 {/*<button onClick={searchProducts}>Zoeken</button>*/}
                 <select onChange={(e) => setQuery({...query, filter: e.target.value})}>
                     <option value={false}>Alle types</option>

@@ -94,3 +94,35 @@
         padding: 0 0.8vw 0 0.6vw
         text-align: justify
 
+.advice-modal-overlay
+  width: 100vw
+  height: 100vh
+  position: absolute
+  top: 0
+  left: 0
+  background-color: rgba(0, 0, 0, 0.2)
+  .advice-modal
+    width: 50vw
+    position: absolute
+    left: 25vw
+    top: 25vh
+    background-color: white
+    padding: 2vw 3vw
+    @media (max-width: 800px)
+      width: 100vw
+      left: 0
+    h1
+      margin-top: 0
+      font-weight: bold
+      font-variant-caps: all-small-caps
+      font-size: 2em
+      color: $color-secondary
+    button
+      border: 0
+      padding: 0.5vw 1vw
+      color: white
+      font-weight: bold
+      background-color: $color-secondary
+      border-radius: 0.2vw
+      font-variant-caps: all-small-caps
+      font-size: 1.1em

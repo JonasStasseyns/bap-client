@@ -565,6 +565,7 @@
 .chat-title-bar {
   padding: 1vw;
   text-align: center;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 }
 @media (max-width: 900px) {
   .chat-title-bar {
@@ -577,6 +578,11 @@
   padding: 1vw 1vw 10vh 1vw;
   border-bottom: 1px solid #CCC;
   overflow-y: scroll;
+}
+@media (max-width: 800px) {
+  .chat-messages-container {
+    padding-bottom: 25vh;
+  }
 }
 
 .chat-send-message-bar {
@@ -981,6 +987,46 @@
   text-align: justify;
 }
 
+.advice-modal-overlay {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+.advice-modal-overlay .advice-modal {
+  width: 50vw;
+  position: absolute;
+  left: 25vw;
+  top: 25vh;
+  background-color: white;
+  padding: 2vw 3vw;
+}
+@media (max-width: 800px) {
+  .advice-modal-overlay .advice-modal {
+    width: 100vw;
+    left: 0;
+  }
+}
+.advice-modal-overlay .advice-modal h1 {
+  margin-top: 0;
+  font-weight: bold;
+  font-variant-caps: all-small-caps;
+  font-size: 2em;
+  color: #398FB5;
+}
+.advice-modal-overlay .advice-modal button {
+  border: 0;
+  padding: 0.5vw 1vw;
+  color: white;
+  font-weight: bold;
+  background-color: #398FB5;
+  border-radius: 0.2vw;
+  font-variant-caps: all-small-caps;
+  font-size: 1.1em;
+}
+
 .account-data {
   display: flex;
   flex-direction: column;
@@ -990,6 +1036,41 @@
   border-bottom: 1px solid #CCCCCC;
   padding: 1vw 0 0.5vw 0.3vw;
   margin-bottom: 1vh;
+}
+@media (max-width: 800px) {
+  .account-data input {
+    margin: 1vh 0;
+  }
+}
+.account-data button {
+  border: 0;
+  padding: 0.5vw 1vw;
+  color: white;
+  font-weight: bold;
+  background-color: #398FB5;
+  border-radius: 0.2vw;
+  font-variant-caps: all-small-caps;
+  font-size: 1.1em;
+}
+@media (max-width: 800px) {
+  .account-data button {
+    padding: 1vh;
+  }
+}
+.account-data .account-pw-reset {
+  display: flex;
+  flex-direction: column;
+}
+
+.last-advice {
+  margin-top: 4vh;
+}
+.last-advice h1 {
+  margin-top: 0;
+  font-weight: bold;
+  font-variant-caps: all-small-caps;
+  font-size: 2em;
+  color: #FC6767;
 }
 
 .home-wrapper {

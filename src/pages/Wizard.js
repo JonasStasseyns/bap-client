@@ -1,6 +1,7 @@
 import {useEffect, useState} from 'react'
-import {decodeJWT} from "../utils/JWT";
+import {decodeJWT, verifyJWT} from "../utils/JWT";
 import {post} from "axios";
+import Advice from "./auth/Advice";
 
 const Wizard = () => {
 
@@ -24,8 +25,13 @@ const Wizard = () => {
         console.log(query)
         if (query.budget && query.filter && query.install) {
             const advice = query
-            advice.uid = await decodeJWT().userId
-            post(process.env.REACT_APP_API_BASE + '/advice', query).then(res => window.location = '/auth/account/advice')
+            localStorage.setItem('advice', JSON.stringify(advice))
+            if(verifyJWT()){
+                advice.uid = await decodeJWT().userId
+                post(process.env.REACT_APP_API_BASE + '/advice', query).then(res => setStep(step+1))
+            }else{
+                setStep(step+1)
+            }
         }
     }
 
@@ -235,7 +241,7 @@ const Wizard = () => {
                 </div>
             </div>
             }
-            {step === 2 &&
+            {step > 1 &&
             <div className="wizard-container">
                 <div className="wizard-info-section">
                     <h2>Stap 3: Wat is je budget?</h2>
@@ -276,6 +282,7 @@ const Wizard = () => {
                 </div>
             </div>
             }
+            {step === 3 && <Advice/>}
         </div>
     )
 };
