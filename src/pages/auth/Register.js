@@ -37,12 +37,12 @@ const Register = (props) => {
     const login = () => {
         if(password !== repeatPassword) return setError('Wachtwoorden komen niet overeen')
         axios.post(`${API_ROOT}/auth/register`, {email, password, firstName, lastName, address, country, phone}).then(res => {
+            console.log('user registered')
             if(userType === "tech"){
-                axios.post(`${API_ROOT}/techs/create`, {hourlyRate, city, firstName, lastName, company, description, allowedJobs:JSON.stringify(allowedJobs), userId: res.data.data.user._id}).then(res => {
-                    if(image) uploadTechPicture(image, res.data._id)
+                axios.post(`${API_ROOT}/techs/create`, {hourlyRate, city, firstName, lastName, company, description, allowedJobs, userId: res.data.data.user._id}).then(res => {
+                    console.log('tech registered')
+                    if(image) uploadTechPicture(image, res.data._id).then(res => window.location = '/auth/login')
                 }).catch(err => console.log(err))
-            } else {
-
             }
         }).catch(err => console.log(err))
     }

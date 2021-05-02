@@ -28,7 +28,7 @@ const TechnicianList = () => {
         setTechs(res.data)
     }).catch(err => console.log(err)), [])
 
-    const loadTechs = () => axios.post(`${API_ROOT}/techs/query`, query).then(res => {
+    const loadTechs = () => axios.get(`${API_ROOT}/techs`).then(res => {
         console.log(res)
         setTechs(res.data)
     }).catch(err => console.log(err))
