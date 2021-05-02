@@ -2,10 +2,18 @@
   width: 100%
   display: flex
   justify-content: space-between
+  @media (max-width: 800px)
+    flex-direction: column-reverse
   .product-list-actual
     width: 100%
   .tech-detail-sidebar
     width: 30%
+    @media (max-width: 1200px)
+      width: 40%
+    @media (max-width: 1000px)
+      width: 50%
+    @media (max-width: 800px)
+      width: 100%
     .tech-detail-main-container
       box-shadow: 0 0 5px rgba(0, 0, 0, 0.1)
       margin-top: 2vw

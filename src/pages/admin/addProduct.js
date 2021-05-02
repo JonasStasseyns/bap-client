@@ -3,6 +3,7 @@ import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import {CKEditor} from "@ckeditor/ckeditor5-react";
 import {uploadProductImage} from "../../services/firebase";
 import {post} from "axios";
+import {adminJWT} from "../../utils/JWT";
 
 const AddProduct = () => {
     const [title, setTitle] = useState(false)

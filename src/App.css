@@ -255,7 +255,8 @@
 
 .product-list-thumbnail-image {
   width: 100%;
-  max-height: 40vh;
+  max-height: 30vh;
+  object-fit: cover;
 }
 
 .product-list-thumbnail-content {
@@ -1073,6 +1074,33 @@
   color: #FC6767;
 }
 
+.account-order {
+  margin: 4vh 0;
+  padding: 2vh;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
+}
+.account-order .order-history-item-title {
+  color: #398FB5;
+  font-weight: bold;
+  font-variant-caps: all-small-caps;
+  font-size: 1.4em;
+  margin: 0;
+}
+.account-order .order-history-item-title-products {
+  font-size: 1em;
+  color: #398FB5;
+  font-weight: bold;
+  font-variant-caps: all-small-caps;
+  margin: 0;
+}
+.account-order .order-history-total {
+  font-size: 1.2em;
+  color: #FC6767;
+  font-weight: bold;
+  font-variant-caps: all-small-caps;
+  margin: 0;
+}
+
 .home-wrapper {
   background-image: url("https://firebasestorage.googleapis.com/v0/b/bachelorproef-b2b80.appspot.com/o/pexels-max-vakhtbovych-6480212.jpg?alt=media&token=f185c9b3-2079-4bf2-99f7-c0d67367d6c5");
   background-size: cover;
@@ -1226,11 +1254,31 @@
   display: flex;
   justify-content: space-between;
 }
+@media (max-width: 800px) {
+  .tech-list-main {
+    flex-direction: column-reverse;
+  }
+}
 .tech-list-main .product-list-actual {
   width: 100%;
 }
 .tech-list-main .tech-detail-sidebar {
   width: 30%;
+}
+@media (max-width: 1200px) {
+  .tech-list-main .tech-detail-sidebar {
+    width: 40%;
+  }
+}
+@media (max-width: 1000px) {
+  .tech-list-main .tech-detail-sidebar {
+    width: 50%;
+  }
+}
+@media (max-width: 800px) {
+  .tech-list-main .tech-detail-sidebar {
+    width: 100%;
+  }
 }
 .tech-list-main .tech-detail-sidebar .tech-detail-main-container {
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);

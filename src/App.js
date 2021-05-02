@@ -9,7 +9,7 @@ import ProductList from "./pages/Products/ProductList";
 import ProductDetail from "./pages/Products/ProductDetail";
 import Login from "./pages/auth/Login";
 import Account from "./pages/auth/Account";
-import {verifyJWT} from "./utils/JWT";
+import {adminJWT, verifyJWT} from "./utils/JWT";
 import Redirect from "./utils/Redirect";
 import SocketLogin from "./pages/auth/SocketLogin";
 import Wizard from './pages/Wizard'
@@ -64,9 +64,9 @@ function App() {
                         <Route path='/wizard' exact component={Wizard}/>
 
                         <Route path='/messages' exact
-                               render={() => (verifyJWT() ? (<Messages/>) : (<Redirect to="/auth/login"/>))}/>
+                               render={() => (adminJWT() ? (<Messages/>) : (<Home/>))}/>
                         <Route path='/messages/:correspondant' exact
-                               render={() => (verifyJWT() ? (<Messages/>) : (<Redirect to="/auth/login"/>))}/>
+                               render={() => (adminJWT() ? (<Messages/>) : (<Home/>))}/>
 
                         <Route path='/payment' exact render={Payment}/>))} />
 

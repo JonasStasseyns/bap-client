@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react'
 import axios from 'axios'
 import Cookies from 'universal-cookie';
 import jwt from 'jsonwebtoken'
-import {verifyJWT} from "../../utils/JWT";
+import {verifyJWT, verifyMobile} from "../../utils/JWT";
 import {Link} from "react-router-dom";
 import QRCode from "qrcode.react";
 
@@ -23,11 +23,11 @@ const SocketLogin = (props) => {
     const [reddy, setReddy] = useState(false)
 
     useEffect(() => {
-        if (verifyJWT()) {
+        if (verifyMobile()) {
             setResponseMessage('JWT IS VALID')
             axios.post(`${API_ROOT}/auth/login/check`, {
                 sid: props.match.params.sid,
-                token: cookies.get('jwt')
+                token: localStorage.getItem('jwt')
             }).then(res => {
                 setResponseMessage('Automatisch inloggen gelukt')
                 setReddy(true)
@@ -40,8 +40,7 @@ const SocketLogin = (props) => {
     const login = () => {
         axios.post(`${API_ROOT}/auth/login`, {email, password, sid: props.match.params.sid}).then(res => {
             setResponseMessage('Logged In')
-            cookies.set('jwt', res.data.token, {path: '/'});
-            console.log(cookies.get('jwt')); // Pacman
+            localStorage.setItem('jwt', res.data.token);
         }).catch(err => console.log(err))
     }
 

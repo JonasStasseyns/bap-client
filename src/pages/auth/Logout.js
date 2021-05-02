@@ -5,7 +5,7 @@ const cookies = new Cookies()
 
 const Logout = () => {
     const history = useHistory()
-    cookies.remove('jwt', {path:'/'})
+    localStorage.removeItem('jwt')
     window.location = '/'
     return (
         <h1>logout</h1>

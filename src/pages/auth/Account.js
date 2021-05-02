@@ -9,25 +9,29 @@ const Account = () => {
 
     console.log(verifyJWT())
 
-    const [user, setUser] = useState(false)
+    const [init, setInit] = useState(true)
+    const [user, setUser] = useState()
     const [search, setSearch] = useState(false)
+
     const [message, setMessage] = useState('')
     const [passwordResetMessage, setPasswordResetMessage] = useState('')
     const [showChangePassword, setShowChangePassword] = useState(false)
     const [newPassword, setNewPassword] = useState(false)
     const [newPasswordRepeat, setNewPasswordRepeat] = useState(false)
 
+    const [orders, setOrders] = useState(false);
+
     useEffect(() => {
         console.log(decodeJWT())
         axios.get(`${API_ROOT}/auth/users/` + decodeJWT().userId).then(res => {
             setUser(res.data)
         }).catch(err => console.log(err))
+        axios.get(`${API_ROOT}/payments/order-history/` + decodeJWT().userId).then(res => {
+            setOrders(res.data)
+            console.log(res.data)
+        }).catch(err => console.log(err))
     }, [])
 
-    const searchProducts = () => axios.get(`${API_ROOT}/products/search/${search}`).then(res => {
-        console.log(res)
-        setUser(res.data)
-    }).catch(err => console.log(err))
 
     const updateUser = () => {
         console.log(user._id)
@@ -35,9 +39,13 @@ const Account = () => {
 
     useEffect(() => setTimeout(() => {
         if (message !== '') setMessage('')
-    }, 5000))
+    }, 5000), [message])
 
-    useEffect(() => axios.put(process.env.REACT_APP_API_BASE + '/auth/users/' + user._id, user).then(res => setMessage('Wijzigingen opgeslagen.')), [user])
+    useEffect(() => {
+        console.log("#### TAKE")
+        if(!init) axios.put(process.env.REACT_APP_API_BASE + '/auth/users/' + user._id, user).then(res => setMessage('Wijzigingen opgeslagen.'))
+        if(user) setInit(false)
+    }, [user])
 
     const updatePassword = () => {
         if (newPassword !== newPasswordRepeat) return setPasswordResetMessage('Wachtwoorden komen niet overeen')
@@ -65,7 +73,7 @@ const Account = () => {
                        onChange={(e) => setUser(prevUser => ({...prevUser, [e.target.name]: e.target.value}))}/>
                 <input type="text" value={user.phone} name="phone"
                        onChange={(e) => setUser(prevUser => ({...prevUser, [e.target.name]: e.target.value}))}/>
-                {message}
+                <p>{message}</p>
                 <div className="change-password-div">
                     <button onClick={() => setShowChangePassword(true)}>Wijzig wachtwoord</button>
                     {showChangePassword &&
@@ -89,6 +97,21 @@ const Account = () => {
                     <Link to="/products/advice">
                         <button>Persoonlijke toestelselectie</button>
                     </Link>
+                </div>
+                <div className="order-history-container">
+                    <h1>Bestelhistoriek</h1>
+                    <div className="order-history-list">
+                        {orders && orders.map((order, key) => (
+                            <div className="account-order" key={key}>
+                                <h2 className="order-history-item-title">Bestelling #{order.paymentId}</h2>
+                                <h2 className="order-history-item-title-products">producten</h2>
+                                {JSON.parse(order.products).map((product, pKey) => <h3 key={pKey}>{product.title}</h3>)}
+                                <h2 className="order-history-total">
+                                    Totaal € {order.total}
+                                </h2>
+                            </div>
+                        ))}
+                    </div>
                 </div>
             </div>
             }

@@ -20,7 +20,7 @@ const TechnicianListThumbnail = (props) => {
         <div className="product-list-thumbnail-link" onClick={() => props.selecter(props.tech)}>
             <div className="product-list-thumbnail tech-thumb">
 
-                <img className="product-list-thumbnail-image" src={image ? image : placeholder} alt={image} />
+                <img className="product-list-thumbnail-image tech-thumb-image" src={image ? image : placeholder} alt={image} />
 
                 <div className="product-list-thumbnail-content">
                     <h3 className="product-list-thumbnail-title">{tech.firstName+' '+tech.lastName}</h3>

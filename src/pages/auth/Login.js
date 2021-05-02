@@ -31,8 +31,7 @@ const Login = (props) => {
             setSid(socket.json.id)
             socket.on('token-event', data => {
                 console.log(data)
-                cookies.set('jwt', data.token, {path: '/', maxAge: 2592000});
-                console.log(cookies.get('jwt'));
+                localStorage.setItem('jwt', data.token);
                 window.location = props.destination ? props.destination : '/'
             })
         })
@@ -40,8 +39,7 @@ const Login = (props) => {
 
 
     const login = () => axios.post(`${API_ROOT}/auth/login`, {email: email.toLowerCase(), password}).then(res => {
-        cookies.set('jwt', res.data.token, {path: '/'});
-        console.log(cookies.get('jwt')); // Pacman
+        localStorage.setItem('jwt', res.data.token);
         window.location = '/'
     }).catch(err => setResponseMessage('E-mail en/of wachtwoord onjuist'))
 
@@ -70,7 +68,7 @@ const Login = (props) => {
                 </div>
                 <div className="login-qr-text-container">
                     {sid &&
-                    <QRCode className="qr-login" value={`https://bachelorproef-b2b80.web.app/auth/socket-login/${sid}`}
+                    <QRCode className="qr-login" value={`https://ac-assistant.be/auth/socket-login/${sid}`}
                             size={256}/>}
                     <div className="login-qr-text">
                         <h2>Reeds ingelogd op je smartphone?</h2>
